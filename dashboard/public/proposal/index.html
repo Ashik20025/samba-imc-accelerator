@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SAMBA Proposal Dashboard</title>
+    <style>
+      body {
+        margin: 0;
+        background: #f5f7fb;
+      }
+      .bar-track {
+        height: 12px;
+        border-radius: 999px;
+        overflow: hidden;
+        background: #e7ebf2;
+        margin-top: 6px;
+      }
+      .bar-fill {
+        height: 100%;
+        border-radius: 999px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://unpkg.com/@emotion/react@11.11.4/dist/emotion-react.umd.min.js"></script>
+    <script src="https://unpkg.com/@emotion/styled@11.11.5/dist/emotion-styled.umd.min.js"></script>
+    <script src="https://unpkg.com/@mui/material@5.15.20/umd/material-ui.production.min.js"></script>
+
+    <script type="text/babel">
+      const {
+        AppBar,
+        Box,
+        Chip,
+        Container,
+        CssBaseline,
+        Divider,
+        LinearProgress,
+        List,
+        ListItem,
+        ListItemText,
+        Paper,
+        Stack,
+        Table,
+        TableBody,
+        TableCell,
+        TableContainer,
+        TableHead,
+        TableRow,
+        ThemeProvider,
+        Toolbar,
+        Typography,
+        createTheme,
+      } = MaterialUI;
+
+      const theme = createTheme({
+        palette: {
+          primary: { main: '#1f5fbf' },
+          secondary: { main: '#0f8f71' },
+          background: { default: '#f5f7fb', paper: '#ffffff' },
+          text: { primary: '#172033', secondary: '#5d6980' },
+        },
+        shape: { borderRadius: 8 },
+        typography: {
+          fontFamily:
+            'Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+          h4: { fontWeight: 760, letterSpacing: 0 },
+          h6: { fontWeight: 720, letterSpacing: 0 },
+        },
+      });
+
+      function fmt(value, digits = 2) {
+        return new Intl.NumberFormat('en-US', {
+          maximumFractionDigits: digits,
+          minimumFractionDigits: digits,
+        }).format(value ?? 0);
+      }
+
+      function MetricTile({ label, value, sub }) {
+        return (
+          <Paper variant="outlined" sx={{ p: 2.5, minHeight: 116 }}>
+            <Typography variant="body2" color="text.secondary">
+              {label}
+            </Typography>
+            <Typography variant="h5" sx={{ mt: 0.5 }}>
+              {value}
+            </Typography>
+            <Typography variant="caption" color="text.secondary">
+              {sub}
+            </Typography>
+          </Paper>
+        );
+      }
+
+      function BarList({ rows, metric }) {
+        const max = Math.max(...rows.map((row) => row[metric]), 1);
+        return (
+          <Stack spacing={1.5}>
+            {rows.map((row) => (
+              <Box key={`${row.variant}-${metric}`}>
+                <Stack direction="row" justifyContent="space-between" gap={2}>
+                  <Typography variant="body2">{row.variant}</Typography>
+                  <Typography variant="body2" fontWeight={700}>
+                    {fmt(row[metric], 3)}x
+                  </Typography>
+                </Stack>
+                <div className="bar-track">
+                  <div
+                    className="bar-fill"
+                    style={{
+                      width: `${Math.max(4, (row[metric] / max) * 100)}%`,
+                      background: metric.includes('energy') ? '#0f8f71' : '#1f5fbf',
+                    }}
+                  />
+                </div>
+              </Box>
+            ))}
+          </Stack>
+        );
+      }
+
+      function App() {
+        const [data, setData] = React.useState(null);
+
+        React.useEffect(() => {
+          fetch('../data/proposal_dashboard.json')
+            .then((response) => response.json())
+            .then(setData);
+        }, []);
+
+        if (!data) {
+          return (
+            <ThemeProvider theme={theme}>
+              <CssBaseline />
+              <Container sx={{ py: 6 }}>
+                <Typography variant="h6">Loading proposal dashboard...</Typography>
+                <LinearProgress sx={{ mt: 2 }} />
+              </Container>
+            </ThemeProvider>
+          );
+        }
+
+        const variants = data.summary.variants;
+        const preliminary = variants.find((row) => row.variant === 'preliminary_samba');
+
+        return (
+          <ThemeProvider theme={theme}>
+            <CssBaseline />
+            <AppBar position="sticky" color="inherit" elevation={0} sx={{ borderBottom: '1px solid #d9dee8' }}>
+              <Toolbar>
+                <Typography variant="h6" sx={{ flexGrow: 1 }}>
+                  SAMBA Proposal Dashboard
+                </Typography>
+                <Chip label="Preliminary only" color="primary" variant="outlined" />
+              </Toolbar>
+            </AppBar>
+
+            <Container maxWidth="xl" sx={{ py: 3 }}>
+              <Stack spacing={3}>
+                <Paper variant="outlined" sx={{ p: 2.5 }}>
+                  <Typography variant="h4">Preliminary Simulator Feasibility Result</Typography>
+                  <Typography color="text.secondary" sx={{ mt: 1, maxWidth: 980 }}>
+                    This proposal dashboard intentionally shows only a small preliminary
+                    microbenchmark. Larger VGG19, ResNet50, ablation, and design-space results are
+                    planned for the final report.
+                  </Typography>
+                </Paper>
+
+                <Box sx={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 2 }}>
+                  <MetricTile
+                    label="Preliminary SAMBA Speedup"
+                    value={`${fmt(preliminary.speedup, 3)}x`}
+                    sub="microbenchmark only"
+                  />
+                  <MetricTile
+                    label="Preliminary Energy Eff."
+                    value={`${fmt(preliminary.energy_efficiency, 3)}x`}
+                    sub="vs fixed ADC baseline"
+                  />
+                  <MetricTile
+                    label="Current Workload"
+                    value="Microbench"
+                    sub={data.summary.workload}
+                  />
+                  <MetricTile
+                    label="Final Work"
+                    value="Planned"
+                    sub="VGG19, ResNet50, ablations"
+                  />
+                </Box>
+
+                <Box sx={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(360px, 1fr))', gap: 2 }}>
+                  <Paper variant="outlined" sx={{ p: 2.5 }}>
+                    <Typography variant="h6">Preliminary Speedup</Typography>
+                    <Divider sx={{ my: 2 }} />
+                    <BarList rows={variants} metric="speedup" />
+                  </Paper>
+                  <Paper variant="outlined" sx={{ p: 2.5 }}>
+                    <Typography variant="h6">Preliminary Energy Efficiency</Typography>
+                    <Divider sx={{ my: 2 }} />
+                    <BarList rows={variants} metric="energy_efficiency" />
+                  </Paper>
+                </Box>
+
+                <TableContainer component={Paper} variant="outlined">
+                  <Table size="small">
+                    <TableHead>
+                      <TableRow>
+                        <TableCell>Design</TableCell>
+                        <TableCell align="right">Latency Cycles</TableCell>
+                        <TableCell align="right">Energy pJ</TableCell>
+                        <TableCell align="right">Speedup</TableCell>
+                        <TableCell align="right">Energy Eff.</TableCell>
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+                      {variants.map((row) => (
+                        <TableRow key={row.variant} hover>
+                          <TableCell>
+                            <Chip
+                              size="small"
+                              label={row.variant}
+                              color={row.variant.includes('samba') ? 'secondary' : 'default'}
+                              variant={row.variant.includes('samba') ? 'filled' : 'outlined'}
+                            />
+                          </TableCell>
+                          <TableCell align="right">{fmt(row.latency_cycles, 0)}</TableCell>
+                          <TableCell align="right">{fmt(row.energy_pj, 0)}</TableCell>
+                          <TableCell align="right">{fmt(row.speedup, 3)}x</TableCell>
+                          <TableCell align="right">{fmt(row.energy_efficiency, 3)}x</TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </TableContainer>
+
+                <Box sx={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(360px, 1fr))', gap: 2 }}>
+                  <Paper variant="outlined" sx={{ p: 2.5 }}>
+                    <Typography variant="h6">Prototype Outputs</Typography>
+                    <List dense>
+                      {data.prototype_outputs.map((item) => (
+                        <ListItem key={item} disableGutters>
+                          <ListItemText primary={item} />
+                        </ListItem>
+                      ))}
+                    </List>
+                  </Paper>
+                  <Paper variant="outlined" sx={{ p: 2.5 }}>
+                    <Typography variant="h6">Planned Final Work</Typography>
+                    <List dense>
+                      {data.planned.map((item) => (
+                        <ListItem key={item} disableGutters>
+                          <ListItemText primary={item} />
+                        </ListItem>
+                      ))}
+                    </List>
+                  </Paper>
+                </Box>
+              </Stack>
+            </Container>
+          </ThemeProvider>
+        );
+      }
+
+      ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,44 @@
+{
+  "title": "SAMBA Preliminary Proposal Dashboard",
+  "status": "proposal_preliminary",
+  "summary": {
+    "workload": "paper_style_microbench",
+    "claim": "Preliminary simulator feasibility result only. Full VGG19, ResNet50, ablation, and design-space results are planned for the final report.",
+    "variants": [
+      {
+        "variant": "fixed_adc_baseline",
+        "latency_cycles": 521112.0,
+        "energy_pj": 325249819.2,
+        "speedup": 1.0,
+        "energy_efficiency": 1.0
+      },
+      {
+        "variant": "sparse_adc_baseline",
+        "latency_cycles": 475464.0,
+        "energy_pj": 59909839.2,
+        "speedup": 1.096,
+        "energy_efficiency": 5.429
+      },
+      {
+        "variant": "preliminary_samba",
+        "latency_cycles": 404114.4,
+        "energy_pj": 59961643.2,
+        "speedup": 1.29,
+        "energy_efficiency": 5.424
+      }
+    ]
+  },
+  "planned": [
+    "Complete VGG19-style workload evaluation",
+    "Complete ResNet50-style workload evaluation",
+    "Run column exchange, row exchange, split MVMU, and data-movement ablations",
+    "Run design-space sweeps over crossbar size, cores per tile, and MVMUs per core",
+    "Update final React/Material UI dashboard with complete results"
+  ],
+  "prototype_outputs": [
+    "JSON/CSV/Markdown preliminary reports",
+    "Basic React/Material UI dashboard",
+    "Unit-tested ADC and mapping modules",
+    "GitHub repository with preliminary source code"
+  ]
+}
