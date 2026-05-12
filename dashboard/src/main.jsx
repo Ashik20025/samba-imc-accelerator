@@ -177,7 +177,10 @@ function LayerTable({ experiment }) {
 
 function App() {
   const [data, setData] = React.useState(null);
-  const [view, setView] = React.useState('headline');
+  const [view, setView] = React.useState(() => {
+    const hashView = window.location.hash.replace('#', '');
+    return ['headline', 'variants', 'layers'].includes(hashView) ? hashView : 'headline';
+  });
   const [selectedRun, setSelectedRun] = React.useState('');
 
   React.useEffect(() => {
@@ -248,7 +251,12 @@ function App() {
                 exclusive
                 value={view}
                 size="small"
-                onChange={(_, next) => next && setView(next)}
+                onChange={(_, next) => {
+                  if (next) {
+                    setView(next);
+                    window.location.hash = next;
+                  }
+                }}
               >
                 <ToggleButton value="headline">Headline</ToggleButton>
                 <ToggleButton value="variants">Variants</ToggleButton>

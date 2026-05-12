@@ -222,6 +222,28 @@ Preliminary SAMBA & 404,114.40 & 59,961,643.20 & 1.290$\times$ \\
 
 This preliminary result suggests that sparse ADC precision reduces energy significantly and that SAMBA-style scheduling can further reduce latency. The final report will include larger workloads and a more complete analysis.
 
+\subsection{Preliminary Dashboard Screenshots}
+
+The following screenshots are preliminary dashboard views from the local React/Material UI interface. They are included to show how the final results will be presented. The current dashboard is connected to simulator output files, but the final report will update these views after the complete experiment matrix is finished.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.92\textwidth]{docs/figures/dashboard_headline.png}
+\caption{Preliminary React/Material UI dashboard headline view showing SAMBA speedup and energy-efficiency summaries.}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.92\textwidth]{docs/figures/dashboard_variants.png}
+\caption{Preliminary variant comparison view showing fixed ADC, sparse ADC, ablation variants, and SAMBA-style results.}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.92\textwidth]{docs/figures/dashboard_layers.png}
+\caption{Preliminary layer-level bottleneck view showing latency, movement cycles, utilization, and load-balancing counts.}
+\end{figure}
+
 \section{Planned Final Results}
 
 For the final presentation, I plan to show:
@@ -291,6 +313,7 @@ Important preliminary files include:
     \item \texttt{src/samba/reporting.py}: Report generation.
     \item \texttt{configs/microbench.json}: Preliminary microbenchmark configuration.
     \item \texttt{dashboard/}: Planned React/Material UI dashboard.
+    \item \texttt{docs/figures/}: Preliminary dashboard screenshots for the proposal.
 \end{itemize}
 
 \subsection{Selected Preliminary Commands}
