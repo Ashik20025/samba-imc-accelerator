@@ -1,0 +1,770 @@
+{
+  "generated_from": "/Users/hanumanashikakshintala/Documents/New project/samba_imc_accelerator/artifacts/final_suite/suite_summary.json",
+  "suite": {
+    "runs": [
+      {
+        "experiment": "microbench (paper_style_microbench)",
+        "variant": "puma_fixed_adc",
+        "latency_cycles": 521112.0,
+        "energy_pj": 325249819.1999999,
+        "speedup_vs_fixed_adc": 1.0,
+        "energy_efficiency_vs_fixed_adc": 1.0,
+        "layer_count": 3,
+        "report_path": "/Users/hanumanashikakshintala/Documents/New project/samba_imc_accelerator/artifacts/final_suite/runs/microbench/index.html"
+      },
+      {
+        "experiment": "microbench (paper_style_microbench)",
+        "variant": "sparse_puma",
+        "latency_cycles": 475464.0,
+        "energy_pj": 59909839.2,
+        "speedup_vs_fixed_adc": 1.096007268689112,
+        "energy_efficiency_vs_fixed_adc": 5.428988352217108,
+        "layer_count": 3,
+        "report_path": "/Users/hanumanashikakshintala/Documents/New project/samba_imc_accelerator/artifacts/final_suite/runs/microbench/index.html"
+      },
+      {
+        "experiment": "microbench (paper_style_microbench)",
+        "variant": "samba",
+        "latency_cycles": 404114.4,
+        "energy_pj": 59961643.2,
+        "speedup_vs_fixed_adc": 1.2895160380327946,
+        "energy_efficiency_vs_fixed_adc": 5.424297965203194,
+        "layer_count": 3,
+        "report_path": "/Users/hanumanashikakshintala/Documents/New project/samba_imc_accelerator/artifacts/final_suite/runs/microbench/index.html"
+      },
+      {
+        "experiment": "vgg19_cifar100_ablation (vgg19_cifar100_75pct_sparse)",
+        "variant": "puma_fixed_adc",
+        "latency_cycles": 23932672.0,
+        "energy_pj": 3597742899.199999,
+        "speedup_vs_fixed_adc": 1.0,
+        "energy_efficiency_vs_fixed_adc": 1.0,
+        "layer_count": 8,
+        "report_path": "/Users/hanumanashikakshintala/Documents/New project/samba_imc_accelerator/artifacts/final_suite/runs/vgg19_cifar100_ablation/index.html"
+      },
+      {
+        "experiment": "vgg19_cifar100_ablation (vgg19_cifar100_75pct_sparse)",
+        "variant": "sparse_puma",
+        "latency_cycles": 16358144.0,
+        "energy_pj": 585473689.6,
+        "speedup_vs_fixed_adc": 1.4630432401133038,
+        "energy_efficiency_vs_fixed_adc": 6.145012086978671,
+        "layer_count": 8,
+        "report_path": "/Users/hanumanashikakshintala/Documents/New project/samba_imc_accelerator/artifacts/final_suite/runs/vgg19_cifar100_ablation/index.html"
+      },
+      {
+        "experiment": "vgg19_cifar100_ablation (vgg19_cifar100_75pct_sparse)",
+        "variant": "col_exchange",
+        "latency_cycles": 16840960.0,
+        "energy_pj": 586365337.6,
+        "speedup_vs_fixed_adc": 1.421099034734362,
+        "energy_efficiency_vs_fixed_adc": 6.135667762909727,
+        "layer_count": 8,
+        "report_path": "/Users/hanumanashikakshintala/Documents/New project/samba_imc_accelerator/artifacts/final_suite/runs/vgg19_cifar100_ablation/index.html"
+      },
+      {
+        "experiment": "vgg19_cifar100_ablation (vgg19_cifar100_75pct_sparse)",
+        "variant": "row_exchange",
+        "latency_cycles": 16413440.0,
+        "energy_pj": 586558464.0,
+        "speedup_vs_fixed_adc": 1.4581143258207907,
+        "energy_efficiency_vs_fixed_adc": 6.133647573108755,
+        "layer_count": 8,
+        "report_path": "/Users/hanumanashikakshintala/Documents/New project/samba_imc_accelerator/artifacts/final_suite/runs/vgg19_cifar100_ablation/index.html"
+      },
+      {
+        "experiment": "vgg19_cifar100_ablation (vgg19_cifar100_75pct_sparse)",
+        "variant": "split_mvmu",
+        "latency_cycles": 15636736.0,
+        "energy_pj": 585776793.6,
+        "speedup_vs_fixed_adc": 1.5305414122231136,
+        "energy_efficiency_vs_fixed_adc": 6.141832415533914,
+        "layer_count": 8,
+        "report_path": "/Users/hanumanashikakshintala/Documents/New project/samba_imc_accelerator/artifacts/final_suite/runs/vgg19_cifar100_ablation/index.html"
+      },
+      {
+        "experiment": "vgg19_cifar100_ablation (vgg19_cifar100_75pct_sparse)",
+        "variant": "load_balance_all",
+        "latency_cycles": 16130304.0,
+        "energy_pj": 587376844.8000001,
+        "speedup_vs_fixed_adc": 1.4837086765382723,
+        "energy_efficiency_vs_fixed_adc": 6.125101680548914,
+        "layer_count": 8,
+        "report_path": "/Users/hanumanashikakshintala/Documents/New project/samba_imc_accelerator/artifacts/final_suite/runs/vgg19_cifar100_ablation/index.html"
+      },
+      {
+        "experiment": "vgg19_cifar100_ablation (vgg19_cifar100_75pct_sparse)",
+        "variant": "data_movement",
+        "latency_cycles": 15549011.199999997,
+        "energy_pj": 585700889.6,
+        "speedup_vs_fixed_adc": 1.5391764590149632,
+        "energy_efficiency_vs_fixed_adc": 6.1426283672832565,
+        "layer_count": 8,
+        "report_path": "/Users/hanumanashikakshintala/Documents/New project/samba_imc_accelerator/artifacts/final_suite/runs/vgg19_cifar100_ablation/index.html"
+      },
+      {
+        "experiment": "vgg19_cifar100_ablation (vgg19_cifar100_75pct_sparse)",
+        "variant": "samba_full",
+        "latency_cycles": 14916179.199999997,
+        "energy_pj": 585861657.6,
+        "speedup_vs_fixed_adc": 1.6044773717923693,
+        "energy_efficiency_vs_fixed_adc": 6.14094275078226,
+        "layer_count": 8,
+        "report_path": "/Users/hanumanashikakshintala/Documents/New project/samba_imc_accelerator/artifacts/final_suite/runs/vgg19_cifar100_ablation/index.html"
+      },
+      {
+        "experiment": "resnet50_imagenet_profile (resnet50_imagenet_75pct_sparse)",
+        "variant": "puma_fixed_adc",
+        "latency_cycles": 396352384.0,
+        "energy_pj": 44771422617.60001,
+        "speedup_vs_fixed_adc": 1.0,
+        "energy_efficiency_vs_fixed_adc": 1.0,
+        "layer_count": 12,
+        "report_path": "/Users/hanumanashikakshintala/Documents/New project/samba_imc_accelerator/artifacts/final_suite/runs/resnet50_imagenet_profile/index.html"
+      },
+      {
+        "experiment": "resnet50_imagenet_profile (resnet50_imagenet_75pct_sparse)",
+        "variant": "sparse_puma",
+        "latency_cycles": 297706368.0,
+        "energy_pj": 3306600908.8000007,
+        "speedup_vs_fixed_adc": 1.3313533958400245,
+        "energy_efficiency_vs_fixed_adc": 13.540014006059177,
+        "layer_count": 12,
+        "report_path": "/Users/hanumanashikakshintala/Documents/New project/samba_imc_accelerator/artifacts/final_suite/runs/resnet50_imagenet_profile/index.html"
+      },
+      {
+        "experiment": "resnet50_imagenet_profile (resnet50_imagenet_75pct_sparse)",
+        "variant": "samba",
+        "latency_cycles": 280082403.2,
+        "energy_pj": 3316505651.2000003,
+        "speedup_vs_fixed_adc": 1.4151277605147312,
+        "energy_efficiency_vs_fixed_adc": 13.49957676128202,
+        "layer_count": 12,
+        "report_path": "/Users/hanumanashikakshintala/Documents/New project/samba_imc_accelerator/artifacts/final_suite/runs/resnet50_imagenet_profile/index.html"
+      },
+      {
+        "experiment": "full_resnet50_imagenet_75 (resnet50_imagenet_75pct_sparse)",
+        "variant": "puma_fixed_adc",
+        "latency_cycles": 524069964.0,
+        "energy_pj": 88319369781.99995,
+        "speedup_vs_fixed_adc": 1.0,
+        "energy_efficiency_vs_fixed_adc": 1.0,
+        "layer_count": 53,
+        "report_path": "/Users/hanumanashikakshintala/Documents/New project/samba_imc_accelerator/artifacts/final_suite/runs/full_resnet50_imagenet_75/index.html"
+      },
+      {
+        "experiment": "full_resnet50_imagenet_75 (resnet50_imagenet_75pct_sparse)",
+        "variant": "sparse_puma",
+        "latency_cycles": 417330324.0,
+        "energy_pj": 11983397762.000002,
+        "speedup_vs_fixed_adc": 1.2557677548492738,
+        "energy_efficiency_vs_fixed_adc": 7.370144222539739,
+        "layer_count": 53,
+        "report_path": "/Users/hanumanashikakshintala/Documents/New project/samba_imc_accelerator/artifacts/final_suite/runs/full_resnet50_imagenet_75/index.html"
+      },
+      {
+        "experiment": "full_resnet50_imagenet_75 (resnet50_imagenet_75pct_sparse)",
+        "variant": "samba",
+        "latency_cycles": 387806217.5999997,
+        "energy_pj": 11998902361.6,
+        "speedup_vs_fixed_adc": 1.3513707109785142,
+        "energy_efficiency_vs_fixed_adc": 7.360620756832541,
+        "layer_count": 53,
+        "report_path": "/Users/hanumanashikakshintala/Documents/New project/samba_imc_accelerator/artifacts/final_suite/runs/full_resnet50_imagenet_75/index.html"
+      }
+    ],
+    "validation": [
+      {
+        "level": "ok",
+        "experiment": "suite",
+        "message": "All sanity checks passed."
+      }
+    ]
+  },
+  "experiments": [
+    {
+      "run_name": "full_resnet50_imagenet_75",
+      "workload": "resnet50_imagenet_75pct_sparse",
+      "variants": [
+        {
+          "variant": "puma_fixed_adc",
+          "latency_cycles": 524069964.0,
+          "energy_pj": 88319369781.99995,
+          "speedup_vs_fixed_adc": 1.0,
+          "energy_efficiency_vs_fixed_adc": 1.0
+        },
+        {
+          "variant": "sparse_puma",
+          "latency_cycles": 417330324.0,
+          "energy_pj": 11983397762.000002,
+          "speedup_vs_fixed_adc": 1.2557677548492738,
+          "energy_efficiency_vs_fixed_adc": 7.370144222539739
+        },
+        {
+          "variant": "samba",
+          "latency_cycles": 387806217.5999997,
+          "energy_pj": 11998902361.6,
+          "speedup_vs_fixed_adc": 1.3513707109785142,
+          "energy_efficiency_vs_fixed_adc": 7.360620756832541
+        }
+      ],
+      "top_layers": [
+        {
+          "layer": "resnet50_stem_7x7",
+          "variant": "samba",
+          "latency_cycles": 26974615.2,
+          "energy_pj": 1234816307.1999998,
+          "speedup": 4.138764062888282,
+          "movement_cycles": 12.0,
+          "utilization": 0.7493923845530651,
+          "column_swaps": 0,
+          "row_swaps": 0,
+          "split_mvmus": 5
+        },
+        {
+          "layer": "resnet50_s2_b1_conv3_1x1",
+          "variant": "samba",
+          "latency_cycles": 23376996.0,
+          "energy_pj": 151626854.40000004,
+          "speedup": 1.1037763791378499,
+          "movement_cycles": 0.0,
+          "utilization": 1.0,
+          "column_swaps": 4,
+          "row_swaps": 0,
+          "split_mvmus": 0
+        },
+        {
+          "layer": "resnet50_s3_b1_conv1_1x1",
+          "variant": "samba",
+          "latency_cycles": 23276644.0,
+          "energy_pj": 298927283.20000005,
+          "speedup": 1.1139241550457188,
+          "movement_cycles": 4.0,
+          "utilization": 0.8341481079123665,
+          "column_swaps": 3,
+          "row_swaps": 0,
+          "split_mvmus": 1
+        },
+        {
+          "layer": "resnet50_s2_b2_conv3_1x1",
+          "variant": "samba",
+          "latency_cycles": 23176292.0,
+          "energy_pj": 150304716.8,
+          "speedup": 1.1133349545302587,
+          "movement_cycles": 0.0,
+          "utilization": 1.0,
+          "column_swaps": 3,
+          "row_swaps": 0,
+          "split_mvmus": 0
+        },
+        {
+          "layer": "resnet50_s2_b1_conv1_1x1",
+          "variant": "samba",
+          "latency_cycles": 23151204.0,
+          "energy_pj": 39232614.400000006,
+          "speedup": 1.1145414294651803,
+          "movement_cycles": 0.0,
+          "utilization": 1.0,
+          "column_swaps": 0,
+          "row_swaps": 0,
+          "split_mvmus": 0
+        },
+        {
+          "layer": "resnet50_s2_b1_projection_1x1",
+          "variant": "samba",
+          "latency_cycles": 23075940.0,
+          "energy_pj": 150987110.40000004,
+          "speedup": 1.118176594322918,
+          "movement_cycles": 0.0,
+          "utilization": 1.0,
+          "column_swaps": 2,
+          "row_swaps": 0,
+          "split_mvmus": 0
+        },
+        {
+          "layer": "resnet50_s2_b3_conv3_1x1",
+          "variant": "samba",
+          "latency_cycles": 23075940.0,
+          "energy_pj": 150944460.80000004,
+          "speedup": 1.118176594322918,
+          "movement_cycles": 0.0,
+          "utilization": 1.0,
+          "column_swaps": 4,
+          "row_swaps": 0,
+          "split_mvmus": 0
+        },
+        {
+          "layer": "resnet50_s2_b2_conv1_1x1",
+          "variant": "samba",
+          "latency_cycles": 22975588.0,
+          "energy_pj": 150219417.60000002,
+          "speedup": 1.1230605284182498,
+          "movement_cycles": 0.0,
+          "utilization": 1.0,
+          "column_swaps": 0,
+          "row_swaps": 8,
+          "split_mvmus": 0
+        },
+        {
+          "layer": "resnet50_s2_b3_conv1_1x1",
+          "variant": "samba",
+          "latency_cycles": 22925412.0,
+          "energy_pj": 148897280.00000003,
+          "speedup": 1.1255185293943681,
+          "movement_cycles": 0.0,
+          "utilization": 1.0,
+          "column_swaps": 0,
+          "row_swaps": 5,
+          "split_mvmus": 0
+        },
+        {
+          "layer": "resnet50_s2_b1_conv2_3x3",
+          "variant": "samba",
+          "latency_cycles": 22423652.0,
+          "energy_pj": 293109376.00000006,
+          "speedup": 1.1618917382413891,
+          "movement_cycles": 4.0,
+          "utilization": 0.9701213818860878,
+          "column_swaps": 0,
+          "row_swaps": 0,
+          "split_mvmus": 1
+        },
+        {
+          "layer": "resnet50_s2_b2_conv2_3x3",
+          "variant": "samba",
+          "latency_cycles": 22423652.0,
+          "energy_pj": 296478694.4,
+          "speedup": 1.1618917382413891,
+          "movement_cycles": 4.0,
+          "utilization": 0.9686274509803922,
+          "column_swaps": 0,
+          "row_swaps": 0,
+          "split_mvmus": 1
+        },
+        {
+          "layer": "resnet50_s2_b3_conv2_3x3",
+          "variant": "samba",
+          "latency_cycles": 22423652.0,
+          "energy_pj": 296478694.4,
+          "speedup": 1.1618917382413891,
+          "movement_cycles": 4.0,
+          "utilization": 0.9671335200746966,
+          "column_swaps": 0,
+          "row_swaps": 0,
+          "split_mvmus": 1
+        }
+      ],
+      "trace_count": 3000,
+      "report_path": "/Users/hanumanashikakshintala/Documents/New project/samba_imc_accelerator/artifacts/final_suite/runs/full_resnet50_imagenet_75/index.html"
+    },
+    {
+      "run_name": "microbench",
+      "workload": "paper_style_microbench",
+      "variants": [
+        {
+          "variant": "puma_fixed_adc",
+          "latency_cycles": 521112.0,
+          "energy_pj": 325249819.1999999,
+          "speedup_vs_fixed_adc": 1.0,
+          "energy_efficiency_vs_fixed_adc": 1.0
+        },
+        {
+          "variant": "sparse_puma",
+          "latency_cycles": 475464.0,
+          "energy_pj": 59909839.2,
+          "speedup_vs_fixed_adc": 1.096007268689112,
+          "energy_efficiency_vs_fixed_adc": 5.428988352217108
+        },
+        {
+          "variant": "samba",
+          "latency_cycles": 404114.4,
+          "energy_pj": 59961643.2,
+          "speedup_vs_fixed_adc": 1.2895160380327946,
+          "energy_efficiency_vs_fixed_adc": 5.424297965203194
+        }
+      ],
+      "top_layers": [
+        {
+          "layer": "conv3x3_256_unbalanced",
+          "variant": "samba",
+          "latency_cycles": 273972.0,
+          "energy_pj": 52852536.0,
+          "speedup": 1.3322821310206883,
+          "movement_cycles": 52.0,
+          "utilization": 0.9197694253279219,
+          "column_swaps": 0,
+          "row_swaps": 0,
+          "split_mvmus": 0
+        },
+        {
+          "layer": "conv3x3_128_unbalanced",
+          "variant": "samba",
+          "latency_cycles": 68239.2,
+          "energy_pj": 3498069.6,
+          "speedup": 1.143800044549174,
+          "movement_cycles": 108.0,
+          "utilization": 0.9420882999948841,
+          "column_swaps": 103,
+          "row_swaps": 3,
+          "split_mvmus": 7
+        },
+        {
+          "layer": "conv3x3_128_balanced70",
+          "variant": "samba",
+          "latency_cycles": 61903.2,
+          "energy_pj": 3611037.6,
+          "speedup": 1.2608718127657375,
+          "movement_cycles": 252.0,
+          "utilization": 0.9973537681239318,
+          "column_swaps": 0,
+          "row_swaps": 0,
+          "split_mvmus": 7
+        }
+      ],
+      "trace_count": 178,
+      "report_path": "/Users/hanumanashikakshintala/Documents/New project/samba_imc_accelerator/artifacts/final_suite/runs/microbench/index.html"
+    },
+    {
+      "run_name": "resnet50_imagenet_profile",
+      "workload": "resnet50_imagenet_75pct_sparse",
+      "variants": [
+        {
+          "variant": "puma_fixed_adc",
+          "latency_cycles": 396352384.0,
+          "energy_pj": 44771422617.60001,
+          "speedup_vs_fixed_adc": 1.0,
+          "energy_efficiency_vs_fixed_adc": 1.0
+        },
+        {
+          "variant": "sparse_puma",
+          "latency_cycles": 297706368.0,
+          "energy_pj": 3306600908.8000007,
+          "speedup_vs_fixed_adc": 1.3313533958400245,
+          "energy_efficiency_vs_fixed_adc": 13.540014006059177
+        },
+        {
+          "variant": "samba",
+          "latency_cycles": 280082403.2,
+          "energy_pj": 3316505651.2000003,
+          "speedup_vs_fixed_adc": 1.4151277605147312,
+          "energy_efficiency_vs_fixed_adc": 13.49957676128202
+        }
+      ],
+      "top_layers": [
+        {
+          "layer": "resnet50_stem_7x7",
+          "variant": "samba",
+          "latency_cycles": 27325847.2,
+          "energy_pj": 1191373926.3999999,
+          "speedup": 4.085566576687877,
+          "movement_cycles": 120.0,
+          "utilization": 0.7502104967723828,
+          "column_swaps": 0,
+          "row_swaps": 0,
+          "split_mvmus": 5
+        },
+        {
+          "layer": "resnet50_s2_b3_conv3_1x1",
+          "variant": "samba",
+          "latency_cycles": 23326820.0,
+          "energy_pj": 151584204.8,
+          "speedup": 1.1061506026110717,
+          "movement_cycles": 0.0,
+          "utilization": 1.0,
+          "column_swaps": 1,
+          "row_swaps": 0,
+          "split_mvmus": 0
+        },
+        {
+          "layer": "resnet50_s2_b1_conv1_1x1",
+          "variant": "samba",
+          "latency_cycles": 23301732.0,
+          "energy_pj": 39488512.000000015,
+          "speedup": 1.107341548688312,
+          "movement_cycles": 0.0,
+          "utilization": 1.0,
+          "column_swaps": 0,
+          "row_swaps": 0,
+          "split_mvmus": 0
+        },
+        {
+          "layer": "resnet50_s2_b1_projection_1x1",
+          "variant": "samba",
+          "latency_cycles": 23276644.0,
+          "energy_pj": 151072409.60000002,
+          "speedup": 1.1085350620132353,
+          "movement_cycles": 0.0,
+          "utilization": 1.0,
+          "column_swaps": 3,
+          "row_swaps": 0,
+          "split_mvmus": 0
+        },
+        {
+          "layer": "resnet50_s2_b2_conv3_1x1",
+          "variant": "samba",
+          "latency_cycles": 23226468.0,
+          "energy_pj": 150347366.40000004,
+          "speedup": 1.1109298236821887,
+          "movement_cycles": 0.0,
+          "utilization": 1.0,
+          "column_swaps": 1,
+          "row_swaps": 0,
+          "split_mvmus": 0
+        },
+        {
+          "layer": "resnet50_s2_b3_conv1_1x1",
+          "variant": "samba",
+          "latency_cycles": 23126116.0,
+          "energy_pj": 149451724.80000004,
+          "speedup": 1.1157505220504818,
+          "movement_cycles": 0.0,
+          "utilization": 1.0,
+          "column_swaps": 0,
+          "row_swaps": 3,
+          "split_mvmus": 0
+        },
+        {
+          "layer": "resnet50_s3_b1_conv1_1x1",
+          "variant": "samba",
+          "latency_cycles": 23101028.0,
+          "energy_pj": 298217292.8000001,
+          "speedup": 1.1223923021953828,
+          "movement_cycles": 4.0,
+          "utilization": 0.8268776141116566,
+          "column_swaps": 3,
+          "row_swaps": 0,
+          "split_mvmus": 1
+        },
+        {
+          "layer": "resnet50_s2_b1_conv3_1x1",
+          "variant": "samba",
+          "latency_cycles": 23075940.0,
+          "energy_pj": 150816512.00000003,
+          "speedup": 1.118176594322918,
+          "movement_cycles": 0.0,
+          "utilization": 1.0,
+          "column_swaps": 3,
+          "row_swaps": 0,
+          "split_mvmus": 0
+        },
+        {
+          "layer": "resnet50_s2_b2_conv1_1x1",
+          "variant": "samba",
+          "latency_cycles": 22925412.0,
+          "energy_pj": 149067878.40000004,
+          "speedup": 1.1255185293943681,
+          "movement_cycles": 0.0,
+          "utilization": 1.0,
+          "column_swaps": 0,
+          "row_swaps": 6,
+          "split_mvmus": 0
+        },
+        {
+          "layer": "resnet50_s2_b1_conv2_3x3",
+          "variant": "samba",
+          "latency_cycles": 22498916.0,
+          "energy_pj": 295199206.4,
+          "speedup": 1.158004945660493,
+          "movement_cycles": 12.0,
+          "utilization": 0.9739146636854854,
+          "column_swaps": 0,
+          "row_swaps": 0,
+          "split_mvmus": 1
+        },
+        {
+          "layer": "resnet50_s2_b2_conv2_3x3",
+          "variant": "samba",
+          "latency_cycles": 22473828.0,
+          "energy_pj": 295241856.0,
+          "speedup": 1.1592976505827133,
+          "movement_cycles": 4.0,
+          "utilization": 0.9672070057760388,
+          "column_swaps": 0,
+          "row_swaps": 0,
+          "split_mvmus": 1
+        },
+        {
+          "layer": "resnet50_s2_b3_conv2_3x3",
+          "variant": "samba",
+          "latency_cycles": 22423652.0,
+          "energy_pj": 294644761.6,
+          "speedup": 1.1618917382413891,
+          "movement_cycles": 4.0,
+          "utilization": 0.9671335200746966,
+          "column_swaps": 0,
+          "row_swaps": 0,
+          "split_mvmus": 1
+        }
+      ],
+      "trace_count": 143,
+      "report_path": "/Users/hanumanashikakshintala/Documents/New project/samba_imc_accelerator/artifacts/final_suite/runs/resnet50_imagenet_profile/index.html"
+    },
+    {
+      "run_name": "vgg19_cifar100_ablation",
+      "workload": "vgg19_cifar100_75pct_sparse",
+      "variants": [
+        {
+          "variant": "puma_fixed_adc",
+          "latency_cycles": 23932672.0,
+          "energy_pj": 3597742899.199999,
+          "speedup_vs_fixed_adc": 1.0,
+          "energy_efficiency_vs_fixed_adc": 1.0
+        },
+        {
+          "variant": "sparse_puma",
+          "latency_cycles": 16358144.0,
+          "energy_pj": 585473689.6,
+          "speedup_vs_fixed_adc": 1.4630432401133038,
+          "energy_efficiency_vs_fixed_adc": 6.145012086978671
+        },
+        {
+          "variant": "col_exchange",
+          "latency_cycles": 16840960.0,
+          "energy_pj": 586365337.6,
+          "speedup_vs_fixed_adc": 1.421099034734362,
+          "energy_efficiency_vs_fixed_adc": 6.135667762909727
+        },
+        {
+          "variant": "row_exchange",
+          "latency_cycles": 16413440.0,
+          "energy_pj": 586558464.0,
+          "speedup_vs_fixed_adc": 1.4581143258207907,
+          "energy_efficiency_vs_fixed_adc": 6.133647573108755
+        },
+        {
+          "variant": "split_mvmu",
+          "latency_cycles": 15636736.0,
+          "energy_pj": 585776793.6,
+          "speedup_vs_fixed_adc": 1.5305414122231136,
+          "energy_efficiency_vs_fixed_adc": 6.141832415533914
+        },
+        {
+          "variant": "load_balance_all",
+          "latency_cycles": 16130304.0,
+          "energy_pj": 587376844.8000001,
+          "speedup_vs_fixed_adc": 1.4837086765382723,
+          "energy_efficiency_vs_fixed_adc": 6.125101680548914
+        },
+        {
+          "variant": "data_movement",
+          "latency_cycles": 15549011.199999997,
+          "energy_pj": 585700889.6,
+          "speedup_vs_fixed_adc": 1.5391764590149632,
+          "energy_efficiency_vs_fixed_adc": 6.1426283672832565
+        },
+        {
+          "variant": "samba_full",
+          "latency_cycles": 14916179.199999997,
+          "energy_pj": 585861657.6,
+          "speedup_vs_fixed_adc": 1.6044773717923693,
+          "energy_efficiency_vs_fixed_adc": 6.14094275078226
+        }
+      ],
+      "top_layers": [
+        {
+          "layer": "vgg19_conv02_64x64",
+          "variant": "samba_full",
+          "latency_cycles": 7272855.2,
+          "energy_pj": 95848448.0,
+          "speedup": 1.1697414242483475,
+          "movement_cycles": 4.0,
+          "utilization": 0.9699191577364166,
+          "column_swaps": 0,
+          "row_swaps": 0,
+          "split_mvmus": 1
+        },
+        {
+          "layer": "vgg19_conv01_3x64",
+          "variant": "samba_full",
+          "latency_cycles": 2038167.2,
+          "energy_pj": 20283801.6,
+          "speedup": 4.174024584440374,
+          "movement_cycles": 12.0,
+          "utilization": 0.8647734956051386,
+          "column_swaps": 0,
+          "row_swaps": 0,
+          "split_mvmus": 1
+        },
+        {
+          "layer": "vgg19_conv04_128x128",
+          "variant": "samba_full",
+          "latency_cycles": 1907300.0,
+          "energy_pj": 94111436.80000001,
+          "speedup": 1.1644859225082578,
+          "movement_cycles": 4.0,
+          "utilization": 0.9283539315780046,
+          "column_swaps": 0,
+          "row_swaps": 0,
+          "split_mvmus": 0
+        },
+        {
+          "layer": "vgg19_conv03_64x128",
+          "variant": "samba_full",
+          "latency_cycles": 1757796.0,
+          "energy_pj": 46871449.6,
+          "speedup": 1.2309050652066564,
+          "movement_cycles": 8.0,
+          "utilization": 0.9303962985314826,
+          "column_swaps": 74,
+          "row_swaps": 0,
+          "split_mvmus": 3
+        },
+        {
+          "layer": "vgg19_conv07_256x256",
+          "variant": "samba_full",
+          "latency_cycles": 489367.2,
+          "energy_pj": 93993113.60000001,
+          "speedup": 1.3260553629258356,
+          "movement_cycles": 168.0,
+          "utilization": 0.9293739967897271,
+          "column_swaps": 0,
+          "row_swaps": 0,
+          "split_mvmus": 0
+        },
+        {
+          "layer": "vgg19_conv08_256x256",
+          "variant": "samba_full",
+          "latency_cycles": 488087.2,
+          "energy_pj": 93774080.0,
+          "speedup": 1.3295329195274943,
+          "movement_cycles": 116.0,
+          "utilization": 0.9225714793109572,
+          "column_swaps": 0,
+          "row_swaps": 0,
+          "split_mvmus": 0
+        },
+        {
+          "layer": "vgg19_conv06_256x256",
+          "variant": "samba_full",
+          "latency_cycles": 485015.2,
+          "energy_pj": 93899699.2,
+          "speedup": 1.3379539445361712,
+          "movement_cycles": 52.0,
+          "utilization": 0.9227361332624491,
+          "column_swaps": 0,
+          "row_swaps": 0,
+          "split_mvmus": 0
+        },
+        {
+          "layer": "vgg19_conv05_128x256",
+          "variant": "samba_full",
+          "latency_cycles": 477591.2,
+          "energy_pj": 47079628.800000004,
+          "speedup": 1.227962324263931,
+          "movement_cycles": 16.0,
+          "utilization": 0.9330109260254343,
+          "column_swaps": 0,
+          "row_swaps": 0,
+          "split_mvmus": 0
+        }
+      ],
+      "trace_count": 1316,
+      "report_path": "/Users/hanumanashikakshintala/Documents/New project/samba_imc_accelerator/artifacts/final_suite/runs/vgg19_cifar100_ablation/index.html"
+    }
+  ],
+  "notes": [
+    "Results are architectural simulation outputs, not chip measurements.",
+    "Speedup and energy efficiency are normalized to fixed ADC PUMA-style baseline.",
+    "SAMBA combines sparse ADC precision, profitable load balancing, and data-movement scheduling."
+  ]
+}

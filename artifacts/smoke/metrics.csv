@@ -1,0 +1,4 @@
+layer,variant,windows,blocks,cores,tiles,latency_cycles,energy_pj,speedup_vs_fixed_adc,energy_efficiency_vs_fixed_adc,avg_core_latency_cycles,bottleneck_core_cycles,movement_cycles,utilization,rearrange_vectors,column_swaps,row_swaps,split_mvmus
+tiny_conv,puma_fixed_adc,9,36,18,9,17932.0,865972.8,1.0,1.0,772.0,772.0,1192.0,1.0,0,0,0,0
+tiny_conv,sparse_puma,9,36,18,9,17572.0,315018.0,1.0204871386296381,2.748962916404777,623.1111111111111,732.0,1192.0,0.851244687310261,0,0,0,0
+tiny_conv,samba,9,36,18,9,8911.2,318168.0,2.0122991291857435,2.721747001584069,623.1111111111111,732.0,256.0,0.851244687310261,0,0,0,0

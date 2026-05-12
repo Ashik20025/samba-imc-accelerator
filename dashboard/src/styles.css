@@ -1,0 +1,71 @@
+body {
+  min-width: 320px;
+}
+
+.topbar {
+  border-bottom: 1px solid #d9dee8;
+}
+
+.summaryBand,
+.panel,
+.metricTile {
+  padding: 20px;
+}
+
+.metricGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.metricTile {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  min-height: 116px;
+}
+
+.metricIcon {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 8px;
+  background: #eaf1ff;
+  color: #1f5fbf;
+  flex: 0 0 auto;
+}
+
+.twoCol {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+  gap: 16px;
+}
+
+.barLabel {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 72%;
+}
+
+.barTrack {
+  height: 12px;
+  margin-top: 6px;
+  border-radius: 999px;
+  background: #e7ebf2;
+  overflow: hidden;
+}
+
+.barFill {
+  height: 100%;
+  border-radius: 999px;
+}
+
+.barFill.speed {
+  background: #1f5fbf;
+}
+
+.barFill.energy {
+  background: #0f8f71;
+}

@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SAMBA Report - paper_style_microbench</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #172033;
+      --muted: #5d6980;
+      --line: #d9dee8;
+      --surface: #ffffff;
+      --band: #f5f7fb;
+      --accent: #2f6fed;
+      --good: #13a37f;
+    }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background: var(--band);
+    }
+    header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--line);
+      padding: 28px clamp(20px, 4vw, 56px);
+    }
+    main {
+      padding: 28px clamp(20px, 4vw, 56px) 56px;
+      display: grid;
+      gap: 24px;
+    }
+    h1, h2 {
+      margin: 0;
+      letter-spacing: 0;
+    }
+    h1 {
+      font-size: clamp(26px, 3vw, 40px);
+    }
+    h2 {
+      font-size: 18px;
+      margin-bottom: 14px;
+    }
+    p {
+      color: var(--muted);
+      max-width: 920px;
+      line-height: 1.55;
+    }
+    section {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 22px;
+      overflow-x: auto;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      min-width: 760px;
+      font-size: 14px;
+    }
+    th, td {
+      border-bottom: 1px solid var(--line);
+      padding: 10px 12px;
+      text-align: right;
+      white-space: nowrap;
+    }
+    th:first-child, td:first-child, th:nth-child(2), td:nth-child(2) {
+      text-align: left;
+    }
+    th {
+      color: var(--muted);
+      font-weight: 650;
+      background: #fbfcff;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
+    }
+    .metric {
+      display: inline-flex;
+      gap: 10px;
+      align-items: baseline;
+      margin-right: 28px;
+    }
+    .metric strong {
+      font-size: 22px;
+    }
+    .metric span {
+      color: var(--muted);
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>SAMBA Experiment Report</h1>
+    <p>paper_style_microbench. Fixed ADC baseline, sparse reconfigurable ADC, SAMBA load balancing, and data-movement scheduling are compared with configurable hardware constants.</p>
+  </header>
+  <main>
+    <section>
+      <h2>Variant Summary</h2>
+      <table>
+        <thead><tr><th>Variant</th><th>Latency Cycles</th><th>Energy pJ</th><th>Speedup</th><th>Energy Efficiency</th></tr></thead>
+        <tbody><tr><td>puma_fixed_adc</td><td>521,112.00</td><td>325,249,819.20</td><td>1.000x</td><td>1.000x</td></tr><tr><td>sparse_puma</td><td>475,464.00</td><td>59,909,839.20</td><td>1.096x</td><td>5.429x</td></tr><tr><td>samba</td><td>404,114.40</td><td>59,961,643.20</td><td>1.290x</td><td>5.424x</td></tr></tbody>
+      </table>
+    </section>
+    <div class="grid">
+      <section>
+        <h2>Speedup vs Fixed ADC</h2>
+        <svg viewBox="0 0 860 260" role="img" aria-label="Variant speedup chart">
+<style>.label{font:13px system-ui;fill:#172033}.value{font:12px system-ui;fill:#3d4960}.grid{stroke:#d9dee8;stroke-width:1}.bar{fill:#2f6fed}.bar2{fill:#13a37f}</style>
+<text class="label" x="0" y="38">puma_fixed_adc</text>
+<rect class="bar" x="150" y="22" width="480" height="18" rx="3"></rect>
+<text class="value" x="638" y="36">1.000x</text>
+<text class="label" x="0" y="66">sparse_puma</text>
+<rect class="bar" x="150" y="50" width="526" height="18" rx="3"></rect>
+<text class="value" x="684" y="64">1.096x</text>
+<text class="label" x="0" y="94">samba</text>
+<rect class="bar2" x="150" y="78" width="620" height="18" rx="3"></rect>
+<text class="value" x="778" y="92">1.290x</text>
+</svg>
+      </section>
+      <section>
+        <h2>Energy Efficiency vs Fixed ADC</h2>
+        <svg viewBox="0 0 860 260" role="img" aria-label="Variant speedup chart">
+<style>.label{font:13px system-ui;fill:#172033}.value{font:12px system-ui;fill:#3d4960}.grid{stroke:#d9dee8;stroke-width:1}.bar{fill:#2f6fed}.bar2{fill:#13a37f}</style>
+<text class="label" x="0" y="38">puma_fixed_adc</text>
+<rect class="bar" x="150" y="22" width="114" height="18" rx="3"></rect>
+<text class="value" x="272" y="36">1.000x</text>
+<text class="label" x="0" y="66">sparse_puma</text>
+<rect class="bar" x="150" y="50" width="620" height="18" rx="3"></rect>
+<text class="value" x="778" y="64">5.429x</text>
+<text class="label" x="0" y="94">samba</text>
+<rect class="bar2" x="150" y="78" width="619" height="18" rx="3"></rect>
+<text class="value" x="777" y="92">5.424x</text>
+</svg>
+      </section>
+    </div>
+    <section>
+      <h2>Top Layer Bottlenecks</h2>
+      <table>
+        <thead><tr><th>Layer</th><th>Variant</th><th>Latency</th><th>Movement</th><th>Utilization</th><th>ColEx</th><th>RowEx</th><th>Split</th></tr></thead>
+        <tbody><tr><td>conv3x3_256_unbalanced</td><td>puma_fixed_adc</td><td>365,008.00</td><td>1,912.00</td><td>100.0%</td><td>0</td><td>0</td><td>0</td></tr><tr><td>conv3x3_256_unbalanced</td><td>sparse_puma</td><td>337,936.00</td><td>1,800.00</td><td>92.0%</td><td>0</td><td>0</td><td>0</td></tr><tr><td>conv3x3_256_unbalanced</td><td>samba</td><td>273,972.00</td><td>52.00</td><td>92.0%</td><td>0</td><td>0</td><td>0</td></tr><tr><td>conv3x3_128_balanced70</td><td>puma_fixed_adc</td><td>78,052.00</td><td>448.00</td><td>100.0%</td><td>0</td><td>0</td><td>0</td></tr><tr><td>conv3x3_128_unbalanced</td><td>puma_fixed_adc</td><td>78,052.00</td><td>448.00</td><td>100.0%</td><td>0</td><td>0</td><td>0</td></tr><tr><td>conv3x3_128_unbalanced</td><td>sparse_puma</td><td>73,876.00</td><td>448.00</td><td>92.1%</td><td>0</td><td>0</td><td>0</td></tr><tr><td>conv3x3_128_unbalanced</td><td>samba</td><td>68,239.20</td><td>108.00</td><td>94.2%</td><td>103</td><td>3</td><td>7</td></tr><tr><td>conv3x3_128_balanced70</td><td>sparse_puma</td><td>63,652.00</td><td>336.00</td><td>98.8%</td><td>0</td><td>0</td><td>0</td></tr><tr><td>conv3x3_128_balanced70</td><td>samba</td><td>61,903.20</td><td>252.00</td><td>99.7%</td><td>0</td><td>0</td><td>7</td></tr></tbody>
+      </table>
+    </section>
+  </main>
+</body>
+</html>

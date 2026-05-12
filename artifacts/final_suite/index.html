@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SAMBA Final Suite</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: #172033;
+      background: #f5f7fb;
+    }
+    header {
+      padding: 34px clamp(22px, 4vw, 64px);
+      background: #fff;
+      border-bottom: 1px solid #d9dee8;
+    }
+    main {
+      padding: 28px clamp(22px, 4vw, 64px) 64px;
+      display: grid;
+      gap: 24px;
+    }
+    h1 { margin: 0; font-size: clamp(28px, 4vw, 44px); letter-spacing: 0; }
+    h2 { margin: 0 0 14px; font-size: 18px; letter-spacing: 0; }
+    p { color: #5d6980; max-width: 920px; line-height: 1.55; }
+    section {
+      background: #fff;
+      border: 1px solid #d9dee8;
+      border-radius: 8px;
+      padding: 22px;
+      overflow-x: auto;
+    }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 24px; }
+    table { border-collapse: collapse; width: 100%; min-width: 760px; font-size: 14px; }
+    th, td { padding: 10px 12px; border-bottom: 1px solid #d9dee8; text-align: right; white-space: nowrap; }
+    th:first-child, td:first-child, th:nth-child(2), td:nth-child(2), th:nth-child(3), td:nth-child(3) { text-align: left; }
+    th { color: #5d6980; background: #fbfcff; }
+    a { color: #2f6fed; text-decoration: none; font-weight: 650; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>SAMBA Final Suite</h1>
+    <p>Aggregate results across microbenchmarks, VGG19, and ResNet50 workloads. This is the main page to open when presenting the project.</p>
+  </header>
+  <main>
+    <section>
+      <h2>Headline Results</h2>
+      <table>
+        <thead><tr><th>Experiment</th><th>SAMBA Variant</th><th>Layers</th><th>Speedup</th><th>Energy Efficiency</th><th>Report</th></tr></thead>
+        <tbody><tr><td>full_resnet50_imagenet_75 (resnet50_imagenet_75pct_sparse)</td><td>samba</td><td>53</td><td>1.351x</td><td>7.361x</td><td><a href="/Users/hanumanashikakshintala/Documents/New project/samba_imc_accelerator/artifacts/final_suite/runs/full_resnet50_imagenet_75/index.html">open</a></td></tr><tr><td>microbench (paper_style_microbench)</td><td>samba</td><td>3</td><td>1.290x</td><td>5.424x</td><td><a href="/Users/hanumanashikakshintala/Documents/New project/samba_imc_accelerator/artifacts/final_suite/runs/microbench/index.html">open</a></td></tr><tr><td>resnet50_imagenet_profile (resnet50_imagenet_75pct_sparse)</td><td>samba</td><td>12</td><td>1.415x</td><td>13.500x</td><td><a href="/Users/hanumanashikakshintala/Documents/New project/samba_imc_accelerator/artifacts/final_suite/runs/resnet50_imagenet_profile/index.html">open</a></td></tr><tr><td>vgg19_cifar100_ablation (vgg19_cifar100_75pct_sparse)</td><td>samba_full</td><td>8</td><td>1.604x</td><td>6.141x</td><td><a href="/Users/hanumanashikakshintala/Documents/New project/samba_imc_accelerator/artifacts/final_suite/runs/vgg19_cifar100_ablation/index.html">open</a></td></tr></tbody>
+      </table>
+    </section>
+    <div class="grid">
+      <section><h2>Best SAMBA Speedup</h2><svg viewBox="0 0 980 180" role="img">
+<style>.lbl{font:13px system-ui;fill:#172033}.val{font:12px system-ui;fill:#46536a}.bar{fill:#2f6fed}.good{fill:#13a37f}</style>
+<text class="lbl" x="0" y="39">full_resnet50_imagenet_75 (resnet5</text>
+<rect class="bar" x="280" y="24" width="505" height="20" rx="4"></rect>
+<text class="val" x="795" y="39">1.351x</text>
+<text class="lbl" x="0" y="73">microbench (paper_style_microbench</text>
+<rect class="bar" x="280" y="58" width="482" height="20" rx="4"></rect>
+<text class="val" x="772" y="73">1.290x</text>
+<text class="lbl" x="0" y="107">resnet50_imagenet_profile (resnet5</text>
+<rect class="bar" x="280" y="92" width="529" height="20" rx="4"></rect>
+<text class="val" x="819" y="107">1.415x</text>
+<text class="lbl" x="0" y="141">vgg19_cifar100_ablation (vgg19_cif</text>
+<rect class="bar" x="280" y="126" width="600" height="20" rx="4"></rect>
+<text class="val" x="890" y="141">1.604x</text>
+</svg></section>
+      <section><h2>Best SAMBA Energy Efficiency</h2><svg viewBox="0 0 980 180" role="img">
+<style>.lbl{font:13px system-ui;fill:#172033}.val{font:12px system-ui;fill:#46536a}.bar{fill:#2f6fed}.good{fill:#13a37f}</style>
+<text class="lbl" x="0" y="39">full_resnet50_imagenet_75 (resnet5</text>
+<rect class="good" x="280" y="24" width="327" height="20" rx="4"></rect>
+<text class="val" x="617" y="39">7.361x</text>
+<text class="lbl" x="0" y="73">microbench (paper_style_microbench</text>
+<rect class="good" x="280" y="58" width="241" height="20" rx="4"></rect>
+<text class="val" x="531" y="73">5.424x</text>
+<text class="lbl" x="0" y="107">resnet50_imagenet_profile (resnet5</text>
+<rect class="good" x="280" y="92" width="600" height="20" rx="4"></rect>
+<text class="val" x="890" y="107">13.500x</text>
+<text class="lbl" x="0" y="141">vgg19_cifar100_ablation (vgg19_cif</text>
+<rect class="good" x="280" y="126" width="272" height="20" rx="4"></rect>
+<text class="val" x="562" y="141">6.141x</text>
+</svg></section>
+    </div>
+    <section>
+      <h2>Validation</h2>
+      <table>
+        <thead><tr><th>Level</th><th>Experiment</th><th>Message</th></tr></thead>
+        <tbody><tr><td>ok</td><td>suite</td><td>All sanity checks passed.</td></tr></tbody>
+      </table>
+    </section>
+  </main>
+</body>
+</html>

@@ -1,0 +1,36 @@
+{
+  "seed": 3,
+  "hardware": {
+    "crossbar_size": 16,
+    "weight_bits": 8,
+    "bits_per_slice": 2,
+    "input_bits": 8,
+    "input_stream_bits": 1,
+    "mvmus_per_core": 2,
+    "cores_per_tile": 2
+  },
+  "optimizations": {
+    "max_column_exchange_iters": 16,
+    "max_row_exchange_iters": 8,
+    "split_extra_mvmu_fraction": 0.25
+  },
+  "workload": {
+    "name": "smoke",
+    "layers": [
+      {
+        "name": "tiny_conv",
+        "type": "conv2d",
+        "kernel_h": 3,
+        "kernel_w": 3,
+        "in_channels": 32,
+        "out_channels": 32,
+        "input_h": 5,
+        "input_w": 5,
+        "stride": 1,
+        "padding": 0,
+        "sparsity": 0.65,
+        "distribution": "unbalanced"
+      }
+    ]
+  }
+}

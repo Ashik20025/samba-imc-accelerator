@@ -1,0 +1,86 @@
+{
+  "seed": 7,
+  "hardware": {
+    "crossbar_size": 64,
+    "weight_bits": 16,
+    "bits_per_slice": 2,
+    "input_bits": 16,
+    "input_stream_bits": 1,
+    "mvmus_per_core": 4,
+    "cores_per_tile": 4,
+    "adc_cycle_per_bit": 1.0,
+    "adc_energy_pj_per_bit": 0.85,
+    "shift_add_cycles": 4.0,
+    "shift_add_energy_pj": 6.0,
+    "rearrange_cycles_per_vector": 12.0,
+    "rearrange_energy_pj_per_vector": 18.0,
+    "load_cycles": 18.0,
+    "store_cycles": 18.0,
+    "send_cycles": 32.0,
+    "receive_cycles": 32.0,
+    "alu_cycles": 4.0,
+    "movement_energy_pj": 25.0
+  },
+  "optimizations": {
+    "enable_column_exchange": true,
+    "enable_row_exchange": true,
+    "enable_split": true,
+    "enable_optimized_allocation": true,
+    "enable_tree_reduction": true,
+    "enable_latency_sort": true,
+    "enable_input_prefetch": true,
+    "max_column_exchange_iters": 128,
+    "max_row_exchange_iters": 64,
+    "min_improvement_cycles": 1.0,
+    "balance_gap_ratio": 0.08,
+    "split_extra_mvmu_fraction": 0.2,
+    "input_prefetch_depth": 2
+  },
+  "workload": {
+    "name": "paper_style_microbench",
+    "layers": [
+      {
+        "name": "conv3x3_128_balanced70",
+        "type": "conv2d",
+        "kernel_h": 3,
+        "kernel_w": 3,
+        "in_channels": 128,
+        "out_channels": 128,
+        "input_h": 5,
+        "input_w": 5,
+        "stride": 1,
+        "padding": 0,
+        "sparsity": 0.70,
+        "distribution": "balanced"
+      },
+      {
+        "name": "conv3x3_128_unbalanced",
+        "type": "conv2d",
+        "kernel_h": 3,
+        "kernel_w": 3,
+        "in_channels": 128,
+        "out_channels": 128,
+        "input_h": 5,
+        "input_w": 5,
+        "stride": 1,
+        "padding": 0,
+        "sparsity": 0.70,
+        "distribution": "unbalanced"
+      },
+      {
+        "name": "conv3x3_256_unbalanced",
+        "type": "conv2d",
+        "kernel_h": 3,
+        "kernel_w": 3,
+        "in_channels": 256,
+        "out_channels": 256,
+        "input_h": 8,
+        "input_w": 8,
+        "stride": 1,
+        "padding": 0,
+        "sparsity": 0.75,
+        "distribution": "unbalanced"
+      }
+    ]
+  }
+}

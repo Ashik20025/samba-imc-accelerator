@@ -1,0 +1,31 @@
+{
+  "seed": 17,
+  "variant_suite": "paper_ablation",
+  "trace_limit": 2000,
+  "hardware": {
+    "crossbar_size": 64,
+    "weight_bits": 16,
+    "bits_per_slice": 2,
+    "input_bits": 16,
+    "input_stream_bits": 1,
+    "mvmus_per_core": 4,
+    "cores_per_tile": 4
+  },
+  "optimizations": {
+    "max_column_exchange_iters": 96,
+    "max_row_exchange_iters": 48,
+    "split_extra_mvmu_fraction": 0.15,
+    "balance_gap_ratio": 0.08,
+    "input_prefetch_depth": 2
+  },
+  "workload": {
+    "max_weight": 15,
+    "model_zoo": {
+      "family": "vgg19",
+      "dataset": "cifar100",
+      "sparsity": 0.75,
+      "distribution": "unbalanced",
+      "max_layers": 8
+    }
+  }
+}

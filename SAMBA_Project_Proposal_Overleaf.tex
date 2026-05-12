@@ -1,0 +1,318 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{times}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{enumitem}
+\usepackage{listings}
+\usepackage{caption}
+\usepackage{float}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    citecolor=blue,
+    urlcolor=blue
+}
+
+\lstdefinestyle{code}{
+    basicstyle=\ttfamily\small,
+    breaklines=true,
+    frame=single,
+    columns=fullflexible,
+    backgroundcolor=\color{gray!6},
+    rulecolor=\color{gray!40}
+}
+\lstset{style=code}
+
+\setlist[itemize]{leftmargin=1.5em}
+\setlist[enumerate]{leftmargin=1.5em}
+
+\title{\textbf{SAMBA: A Sparsity-Aware In-Memory Computing Accelerator Simulator for Machine Learning Inference}}
+\author{Hanuman Ashik Akshintala\\Course Project Proposal}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+
+This project is based on the paper ``SAMBA: Sparsity Aware In-Memory Computing Based Machine Learning Accelerator'' by Kim, Ankit, Wang, and Roy. The paper studies how analog in-memory computing (IMC) accelerators can improve machine-learning inference by exploiting sparsity in neural-network weights. In these systems, matrix-vector multiplication is performed inside memory crossbar arrays, which reduces data movement compared with traditional processor-memory architectures.
+
+However, analog IMC accelerators still face a major bottleneck: analog-to-digital converters (ADCs). Crossbar outputs are analog currents or voltages, but the rest of the system uses digital values. Therefore, ADCs are needed to convert analog outputs into digital numbers. ADC latency and energy increase with precision, so high-precision ADCs can dominate the total cost of inference.
+
+The SAMBA paper proposes to reduce this bottleneck by using weight sparsity. If many weights are zero, the required ADC precision can be reduced. However, sparsity is often uneven across crossbars and processing cores. A few dense or low-sparsity blocks can become bottlenecks and prevent the system from receiving the full benefit of reconfigurable ADCs. SAMBA addresses this problem using sparsity-aware load balancing and data-movement optimizations.
+
+In this project, I propose to build a software simulator for a SAMBA-style analog IMC accelerator. The simulator compares a fixed-ADC PUMA-style baseline, a sparse reconfigurable-ADC baseline, and a SAMBA design with load balancing and optimized data movement. The goal is to evaluate latency, energy, speedup, energy efficiency, and design-space tradeoffs for convolutional neural-network workloads.
+
+This project is important because AI inference is increasingly limited by memory movement and energy cost. A simulator for sparsity-aware IMC acceleration helps study hardware ideas before building expensive chip-level implementations. The project is feasible as a course project because it focuses on architectural modeling, workload mapping, algorithmic load balancing, scheduling, and reproducible experiments rather than physical chip fabrication.
+
+\section{Method}
+
+The proposed system implements a configurable architectural simulator for a SAMBA-style analog IMC accelerator. The high-level workflow is:
+
+\begin{center}
+\texttt{Neural Network Weights $\rightarrow$ Crossbar Mapping $\rightarrow$ ADC Model $\rightarrow$ SAMBA Optimizations $\rightarrow$ Latency/Energy Reports}
+\end{center}
+
+\subsection{System Components}
+
+\begin{itemize}
+    \item \textbf{Workload Generator:} Creates synthetic convolutional and fully connected layers with configurable sparsity. It also includes VGG19 and ResNet50-style workload generators for CIFAR-100 and ImageNet-like experiments.
+    \item \textbf{Weight Mapper:} Partitions neural-network weight matrices into crossbar-sized matrix-vector multiplication units (MVMUs). The default configuration follows the paper's examples, such as 64$\times$64 MVMUs and 16-bit weights.
+    \item \textbf{ADC Precision Model:} Estimates the required ADC precision for each bit-sliced crossbar column. Sparse columns require fewer ADC bits, reducing latency and energy.
+    \item \textbf{Intra-Matrix Load Balancer:} Implements column exchange and row exchange to reduce sparsity imbalance across MVMUs that execute together.
+    \item \textbf{Inter-Matrix Load Balancer:} Implements split MVMUs, where slow dense blocks are divided across additional MVMUs to improve parallelism.
+    \item \textbf{Data-Movement Scheduler:} Models chain reduction, tree reduction, latency-aware core sorting, and input prefetching to reduce communication delays across cores and tiles.
+    \item \textbf{Compiler Profit Guard:} Applies load-balancing transformations only when the estimated benefit is larger than rearrangement and split overhead.
+    \item \textbf{Reporting System:} Generates JSON, CSV, Markdown, trace CSV, static HTML dashboards, and a React/Material UI results dashboard for analysis and presentation.
+\end{itemize}
+
+\subsection{Baseline and Proposed Designs}
+
+The simulator compares the following designs:
+
+\begin{itemize}
+    \item \textbf{PUMA Fixed ADC Baseline:} A conventional PUMA-style analog IMC accelerator using fixed-precision ADC conversion.
+    \item \textbf{Sparse PUMA Baseline:} A sparsity-aware baseline that reduces ADC precision using static weight sparsity but does not apply SAMBA load balancing.
+    \item \textbf{SAMBA Full Design:} Reconfigurable ADC plus sparsity-aware load balancing and optimized data movement.
+\end{itemize}
+
+\subsection{ADC Modeling}
+
+For each MVMU, weights are divided into bit slices. The simulator estimates ADC precision per column using the idea from the SAMBA paper: dense columns require more ADC bits, while sparse columns require fewer bits. If a column contains all zeros, the ADC conversion for that column can be skipped in the model.
+
+The simulator tracks:
+
+\begin{itemize}
+    \item ADC precision per column,
+    \item MVM latency,
+    \item ADC energy,
+    \item shift-and-add cost,
+    \item data movement across cores and tiles,
+    \item rearrangement overhead from load balancing.
+\end{itemize}
+
+\subsection{Critical and Interesting Points}
+
+The critical systems and architecture aspects of this project are:
+
+\begin{itemize}
+    \item \textbf{Sparse ADC precision:} The simulator models how sparsity lowers ADC precision and reduces energy.
+    \item \textbf{Load imbalance:} Sparse weights are not always evenly distributed, so one dense MVMU can delay the whole core.
+    \item \textbf{Column and row exchange:} The simulator implements SAMBA-style balancing to reduce bottlenecks within a matrix.
+    \item \textbf{Split MVMU:} Slow MVMUs can be split into two parallel MVMUs to reduce latency.
+    \item \textbf{Data movement:} The simulator models why partial-sum movement across cores and tiles can become expensive.
+    \item \textbf{Ablation study:} Individual components are evaluated separately to show which optimizations help.
+    \item \textbf{Design-space exploration:} The simulator compares crossbar size, cores per tile, and MVMUs per core.
+\end{itemize}
+
+\subsection{Parameters and Algorithm Choices to Compare}
+
+The final evaluation compares the following parameters:
+
+\begin{itemize}
+    \item Crossbar size: for example 16, 32, and 64.
+    \item Number of cores per tile: for example 2, 4, and 8.
+    \item Number of MVMUs per core: for example 2, 4, 8, and 16.
+    \item Workload type: microbenchmarks, VGG19-style networks, and ResNet50-style networks.
+    \item Sparsity level: for example 50\%, 70\%, and 75\%.
+    \item Optimization type: fixed ADC, sparse ADC, column exchange, row exchange, split MVMU, data movement optimization, and full SAMBA.
+\end{itemize}
+
+The main metrics are latency cycles, energy in picojoules, speedup over fixed ADC, energy-efficiency improvement over fixed ADC, core utilization, movement cycles, and number of balancing operations.
+
+\section{Use of Large Language Models}
+
+I used ChatGPT as a support tool while working on this project. After reading the SAMBA paper, I used it to check my understanding of the main architecture ideas, especially analog in-memory computing, reconfigurable ADC precision, sparsity-aware weight mapping, MVMU load balancing, and data movement across cores and tiles.
+
+During the implementation, I used it mainly when I ran into modeling, coding, and debugging issues. For example, I asked questions about how to structure a Python-based accelerator simulator, how to calculate ADC precision from sparse crossbar columns, and how to organize experiment outputs. I still reviewed the suggestions and tested the changes myself.
+
+For the output display, I first generated simple JSON, CSV, and Markdown reports from the simulator results. After that, I used ChatGPT to help make the output cleaner by planning a React dashboard using Material UI for speedup, energy, ablation, and layer-bottleneck results.
+
+Example prompts used during development included:
+
+\begin{quote}
+After reading the paper ``SAMBA: Sparsity Aware In-Memory Computing Based Machine Learning Accelerator,'' explain the main architecture ideas related to analog in-memory computing, ADC precision, sparsity, load balancing, and data movement.
+\end{quote}
+
+\begin{quote}
+I am implementing a local Python simulator for a SAMBA-style analog IMC accelerator. Help me debug issues in the crossbar mapping and ADC precision calculation.
+\end{quote}
+
+\begin{quote}
+My simulator is producing latency and energy numbers for fixed ADC, sparse ADC, and SAMBA-style optimization. Help me identify checks I can use to verify that the comparison is fair.
+\end{quote}
+
+\begin{quote}
+I have basic JSON, CSV, and Markdown reports showing latency, energy, speedup, and layer bottlenecks. Help me redesign the output as a cleaner React dashboard using Material UI.
+\end{quote}
+
+The prompts were improved during development by making them more specific. For example, instead of asking only for general help with the paper, I added the exact simulator components I was using, such as crossbar MVMUs, ADC bit precision, sparse weight mapping, load balancing, VGG19/ResNet50-style workloads, latency and energy metrics, and the dashboard output. This made the responses more useful for debugging and presentation improvements.
+
+\section{Preliminary Experimental Results}
+
+The current implementation already runs end-to-end and generates preliminary results. These results are simulated architectural estimates, not physical chip measurements. They show that the software pipeline is working and that SAMBA-style optimizations can improve latency and energy efficiency in the simulator.
+
+\subsection{Full ResNet50 ImageNet-Style Result}
+
+The strongest preliminary result uses a full ResNet50 ImageNet-style synthetic workload with 75\% sparse weights. The run includes 53 generated convolution/projection layers.
+
+\begin{table}[H]
+\centering
+\caption{Preliminary full ResNet50 ImageNet-style simulation result.}
+\begin{tabular}{lrrr}
+\toprule
+\textbf{Design} & \textbf{Latency Cycles} & \textbf{Energy (pJ)} & \textbf{Speedup} \\
+\midrule
+Fixed ADC PUMA & 524,069,964.00 & 88,319,369,782.00 & 1.000$\times$ \\
+Sparse PUMA & 417,330,324.00 & 11,983,397,762.00 & 1.256$\times$ \\
+SAMBA & 387,806,217.60 & 11,998,902,361.60 & 1.351$\times$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+In this run, SAMBA achieves a 1.351$\times$ speedup over the fixed ADC baseline. The energy-efficiency improvement is approximately 7.361$\times$ over the fixed ADC baseline. Most of the energy improvement comes from sparse ADC precision, while SAMBA adds additional latency reduction through optimized data movement and profitable load balancing.
+
+\subsection{VGG19 CIFAR-100-Style Ablation Result}
+
+The VGG19-style CIFAR-100 ablation evaluates individual SAMBA components. The preliminary result is:
+
+\begin{table}[H]
+\centering
+\caption{Preliminary VGG19 CIFAR-100-style ablation result.}
+\begin{tabular}{lrrr}
+\toprule
+\textbf{Variant} & \textbf{Latency Cycles} & \textbf{Speedup} & \textbf{Energy Efficiency} \\
+\midrule
+Fixed ADC PUMA & 23,932,672.00 & 1.000$\times$ & 1.000$\times$ \\
+Sparse PUMA & 16,358,144.00 & 1.463$\times$ & 6.145$\times$ \\
+Split MVMU & 15,636,736.00 & 1.531$\times$ & 6.142$\times$ \\
+Data Movement & 15,549,011.20 & 1.539$\times$ & 6.143$\times$ \\
+SAMBA Full & 14,916,179.20 & 1.604$\times$ & 6.141$\times$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+This ablation shows that sparse ADC precision gives large energy benefit, while data movement optimization and selected load-balancing transformations provide additional speedup.
+
+\subsection{Generated Outputs}
+
+The simulator produces the following output artifacts for each run:
+
+\begin{itemize}
+    \item \texttt{metrics.json}: complete machine-readable result data.
+    \item \texttt{metrics.csv}: layer-level metrics for spreadsheet analysis.
+    \item \texttt{trace.csv}: sampled instruction-level timeline events.
+    \item \texttt{report.md}: Markdown report.
+    \item \texttt{index.html}: local dashboard with tables and charts.
+    \item \texttt{dashboard/}: React and Material UI dashboard for presenting aggregate results interactively.
+\end{itemize}
+
+For presentation, I plan to use the React/Material UI dashboard as the main visual output. This dashboard shows headline speedup, energy-efficiency improvement, ablation variants, bottleneck layers, movement cycles, core utilization, and load-balancing counts. The raw CSV, JSON, and trace files are kept as supporting evidence.
+
+\section{Future Work}
+
+The remaining work before the final presentation includes:
+
+\begin{itemize}
+    \item Add real trained model weight ingestion from ONNX or PyTorch exports.
+    \item Add pruning utilities to generate controlled 50\%, 70\%, and 75\% sparse models.
+    \item Calibrate ADC, memory, and interconnect constants using published hardware data.
+    \item Add more design-space sweeps for crossbar size, MVMUs per core, and cores per tile.
+    \item Add more visualization panels for core utilization, movement cycles, and bottleneck layers.
+    \item Compare more CNN workloads beyond VGG19 and ResNet50.
+    \item Prepare final presentation slides and final report.
+\end{itemize}
+
+A possible extension beyond the course project would be to export simulator mappings into a PUMAsim-compatible or RTL-oriented format for lower-level hardware validation.
+
+\section{Team}
+
+This is an individual project. I am responsible for reading the paper, designing the simulator, implementing the code, running experiments, analyzing results, writing the proposal and final report, and preparing the presentation.
+
+\section{References}
+
+\begin{enumerate}
+    \item Dong Eun Kim, Aayush Ankit, Cheng Wang, and Kaushik Roy. ``SAMBA: Sparsity Aware In-Memory Computing Based Machine Learning Accelerator.'' \textit{IEEE Transactions on Computers}, 72(9), 2023.
+    \item Aayush Ankit et al. ``PUMA: A Programmable Ultra-efficient Memristor-based Accelerator for Machine Learning Inference.'' \textit{ASPLOS}, 2019.
+    \item Vivienne Sze, Yu-Hsin Chen, Tien-Ju Yang, and Joel S. Emer. ``Efficient Processing of Deep Neural Networks: A Tutorial and Survey.'' \textit{Proceedings of the IEEE}, 2017.
+    \item Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian Sun. ``Deep Residual Learning for Image Recognition.'' \textit{CVPR}, 2016.
+    \item Karen Simonyan and Andrew Zisserman. ``Very Deep Convolutional Networks for Large-Scale Image Recognition.'' \textit{ICLR}, 2015.
+    \item NumPy. \url{https://numpy.org/}
+    \item Python. \url{https://www.python.org/}
+\end{enumerate}
+
+\section{Source Code}
+
+The project source code is organized as a reproducible Python simulator. The GitHub repository link can be added here before submission:
+
+\begin{center}
+\texttt{https://github.com/Ashik20025/samba-imc-accelerator}
+\end{center}
+
+Important files include:
+
+\begin{itemize}
+    \item \texttt{src/samba/adc.py}: ADC precision, latency, and energy model.
+    \item \texttt{src/samba/mapping.py}: CNN and fully connected layer mapping to crossbar MVMUs.
+    \item \texttt{src/samba/balancing.py}: Column exchange, row exchange, and split MVMU load balancing.
+    \item \texttt{src/samba/simulator.py}: Experiment orchestration and timing simulation.
+    \item \texttt{src/samba/design\_space.py}: Hardware design-space exploration.
+    \item \texttt{src/samba/suite.py}: Full project suite runner and aggregate reporting.
+    \item \texttt{src/samba/reporting.py}: JSON, CSV, Markdown, trace, and HTML report generation.
+    \item \texttt{dashboard/src/main.jsx}: React/Material UI dashboard for visualizing final results.
+    \item \texttt{dashboard/public/standalone/index.html}: Standalone React/Material UI dashboard that can run without local package installation.
+    \item \texttt{configs/full\_resnet50\_imagenet\_75.json}: Full ResNet50 ImageNet-style experiment.
+    \item \texttt{configs/vgg19\_cifar100\_ablation.json}: VGG19-style ablation experiment.
+    \item \texttt{scripts/run\_solid\_demo.sh}: One-command test and experiment script.
+\end{itemize}
+
+\subsection{Selected Preliminary Commands}
+
+The following command runs the unit tests:
+
+\begin{lstlisting}
+PYTHONPATH=src python3 -m unittest discover -s tests
+\end{lstlisting}
+
+The following command runs the full ResNet50 ImageNet-style experiment:
+
+\begin{lstlisting}
+PYTHONPATH=src python3 -m samba run \
+  --config configs/full_resnet50_imagenet_75.json \
+  --out artifacts/full_resnet50_imagenet_75
+\end{lstlisting}
+
+The following command generates the final aggregate dashboard:
+
+\begin{lstlisting}
+PYTHONPATH=src python3 -m samba suite \
+  --configs configs/microbench.json,configs/vgg19_cifar100_ablation.json,configs/resnet50_imagenet_profile.json,configs/full_resnet50_imagenet_75.json \
+  --out artifacts/final_suite
+\end{lstlisting}
+
+The final dashboard can be opened locally:
+
+\begin{lstlisting}
+open artifacts/final_suite/index.html
+\end{lstlisting}
+
+The React/Material UI dashboard can be started with:
+
+\begin{lstlisting}
+./scripts/start_results_dashboard.sh
+\end{lstlisting}
+
+Then open:
+
+\begin{lstlisting}
+http://127.0.0.1:8088/standalone/
+\end{lstlisting}
+
+\end{document}

@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SAMBA Report - resnet50_imagenet_75pct_sparse</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #172033;
+      --muted: #5d6980;
+      --line: #d9dee8;
+      --surface: #ffffff;
+      --band: #f5f7fb;
+      --accent: #2f6fed;
+      --good: #13a37f;
+    }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background: var(--band);
+    }
+    header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--line);
+      padding: 28px clamp(20px, 4vw, 56px);
+    }
+    main {
+      padding: 28px clamp(20px, 4vw, 56px) 56px;
+      display: grid;
+      gap: 24px;
+    }
+    h1, h2 {
+      margin: 0;
+      letter-spacing: 0;
+    }
+    h1 {
+      font-size: clamp(26px, 3vw, 40px);
+    }
+    h2 {
+      font-size: 18px;
+      margin-bottom: 14px;
+    }
+    p {
+      color: var(--muted);
+      max-width: 920px;
+      line-height: 1.55;
+    }
+    section {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 22px;
+      overflow-x: auto;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      min-width: 760px;
+      font-size: 14px;
+    }
+    th, td {
+      border-bottom: 1px solid var(--line);
+      padding: 10px 12px;
+      text-align: right;
+      white-space: nowrap;
+    }
+    th:first-child, td:first-child, th:nth-child(2), td:nth-child(2) {
+      text-align: left;
+    }
+    th {
+      color: var(--muted);
+      font-weight: 650;
+      background: #fbfcff;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
+    }
+    .metric {
+      display: inline-flex;
+      gap: 10px;
+      align-items: baseline;
+      margin-right: 28px;
+    }
+    .metric strong {
+      font-size: 22px;
+    }
+    .metric span {
+      color: var(--muted);
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>SAMBA Experiment Report</h1>
+    <p>resnet50_imagenet_75pct_sparse. Fixed ADC baseline, sparse reconfigurable ADC, SAMBA load balancing, and data-movement scheduling are compared with configurable hardware constants.</p>
+  </header>
+  <main>
+    <section>
+      <h2>Variant Summary</h2>
+      <table>
+        <thead><tr><th>Variant</th><th>Latency Cycles</th><th>Energy pJ</th><th>Speedup</th><th>Energy Efficiency</th></tr></thead>
+        <tbody><tr><td>puma_fixed_adc</td><td>524,069,964.00</td><td>88,319,369,782.00</td><td>1.000x</td><td>1.000x</td></tr><tr><td>sparse_puma</td><td>417,330,324.00</td><td>11,983,397,762.00</td><td>1.256x</td><td>7.370x</td></tr><tr><td>samba</td><td>387,806,217.60</td><td>11,998,902,361.60</td><td>1.351x</td><td>7.361x</td></tr></tbody>
+      </table>
+    </section>
+    <div class="grid">
+      <section>
+        <h2>Speedup vs Fixed ADC</h2>
+        <svg viewBox="0 0 860 260" role="img" aria-label="Variant speedup chart">
+<style>.label{font:13px system-ui;fill:#172033}.value{font:12px system-ui;fill:#3d4960}.grid{stroke:#d9dee8;stroke-width:1}.bar{fill:#2f6fed}.bar2{fill:#13a37f}</style>
+<text class="label" x="0" y="38">puma_fixed_adc</text>
+<rect class="bar" x="150" y="22" width="458" height="18" rx="3"></rect>
+<text class="value" x="616" y="36">1.000x</text>
+<text class="label" x="0" y="66">sparse_puma</text>
+<rect class="bar" x="150" y="50" width="576" height="18" rx="3"></rect>
+<text class="value" x="734" y="64">1.256x</text>
+<text class="label" x="0" y="94">samba</text>
+<rect class="bar2" x="150" y="78" width="620" height="18" rx="3"></rect>
+<text class="value" x="778" y="92">1.351x</text>
+</svg>
+      </section>
+      <section>
+        <h2>Energy Efficiency vs Fixed ADC</h2>
+        <svg viewBox="0 0 860 260" role="img" aria-label="Variant speedup chart">
+<style>.label{font:13px system-ui;fill:#172033}.value{font:12px system-ui;fill:#3d4960}.grid{stroke:#d9dee8;stroke-width:1}.bar{fill:#2f6fed}.bar2{fill:#13a37f}</style>
+<text class="label" x="0" y="38">puma_fixed_adc</text>
+<rect class="bar" x="150" y="22" width="84" height="18" rx="3"></rect>
+<text class="value" x="242" y="36">1.000x</text>
+<text class="label" x="0" y="66">sparse_puma</text>
+<rect class="bar" x="150" y="50" width="619" height="18" rx="3"></rect>
+<text class="value" x="777" y="64">7.370x</text>
+<text class="label" x="0" y="94">samba</text>
+<rect class="bar2" x="150" y="78" width="619" height="18" rx="3"></rect>
+<text class="value" x="777" y="92">7.361x</text>
+</svg>
+      </section>
+    </div>
+    <section>
+      <h2>Top Layer Bottlenecks</h2>
+      <table>
+        <thead><tr><th>Layer</th><th>Variant</th><th>Latency</th><th>Movement</th><th>Utilization</th><th>ColEx</th><th>RowEx</th><th>Split</th></tr></thead>
+        <tbody><tr><td>resnet50_stem_7x7</td><td>puma_fixed_adc</td><td>111,641,568.00</td><td>672.00</td><td>100.0%</td><td>0</td><td>0</td><td>0</td></tr><tr><td>resnet50_stem_7x7</td><td>sparse_puma</td><td>40,190,944.00</td><td>672.00</td><td>76.0%</td><td>0</td><td>0</td><td>0</td></tr><tr><td>resnet50_stem_7x7</td><td>samba</td><td>26,974,615.20</td><td>12.00</td><td>74.9%</td><td>0</td><td>0</td><td>5</td></tr><tr><td>resnet50_s2_b1_conv2_3x3</td><td>puma_fixed_adc</td><td>26,053,856.00</td><td>80.00</td><td>100.0%</td><td>0</td><td>0</td><td>0</td></tr><tr><td>resnet50_s2_b2_conv2_3x3</td><td>puma_fixed_adc</td><td>26,053,856.00</td><td>80.00</td><td>100.0%</td><td>0</td><td>0</td><td>0</td></tr><tr><td>resnet50_s2_b3_conv2_3x3</td><td>puma_fixed_adc</td><td>26,053,856.00</td><td>80.00</td><td>100.0%</td><td>0</td><td>0</td><td>0</td></tr><tr><td>resnet50_s3_b1_conv1_1x1</td><td>puma_fixed_adc</td><td>25,928,416.00</td><td>40.00</td><td>100.0%</td><td>0</td><td>0</td><td>0</td></tr><tr><td>resnet50_s2_b1_conv1_1x1</td><td>puma_fixed_adc</td><td>25,802,976.00</td><td>0.00</td><td>100.0%</td><td>0</td><td>0</td><td>0</td></tr><tr><td>resnet50_s2_b1_conv3_1x1</td><td>puma_fixed_adc</td><td>25,802,976.00</td><td>0.00</td><td>100.0%</td><td>0</td><td>0</td><td>0</td></tr><tr><td>resnet50_s2_b1_projection_1x1</td><td>puma_fixed_adc</td><td>25,802,976.00</td><td>0.00</td><td>100.0%</td><td>0</td><td>0</td><td>0</td></tr><tr><td>resnet50_s2_b2_conv1_1x1</td><td>puma_fixed_adc</td><td>25,802,976.00</td><td>0.00</td><td>100.0%</td><td>0</td><td>0</td><td>0</td></tr><tr><td>resnet50_s2_b2_conv3_1x1</td><td>puma_fixed_adc</td><td>25,802,976.00</td><td>0.00</td><td>100.0%</td><td>0</td><td>0</td><td>0</td></tr><tr><td>resnet50_s2_b3_conv1_1x1</td><td>puma_fixed_adc</td><td>25,802,976.00</td><td>0.00</td><td>100.0%</td><td>0</td><td>0</td><td>0</td></tr><tr><td>resnet50_s2_b3_conv3_1x1</td><td>puma_fixed_adc</td><td>25,802,976.00</td><td>0.00</td><td>100.0%</td><td>0</td><td>0</td><td>0</td></tr><tr><td>resnet50_s2_b1_conv2_3x3</td><td>sparse_puma</td><td>23,795,936.00</td><td>80.00</td><td>93.4%</td><td>0</td><td>0</td><td>0</td></tr></tbody>
+      </table>
+    </section>
+  </main>
+</body>
+</html>

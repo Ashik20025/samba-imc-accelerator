@@ -1,0 +1,696 @@
+{
+  "workload": "smoke",
+  "hardware": {
+    "crossbar_size": 16,
+    "weight_bits": 8,
+    "bits_per_slice": 2,
+    "input_bits": 8,
+    "input_stream_bits": 1,
+    "mvmus_per_core": 2,
+    "cores_per_tile": 2,
+    "adc_cycle_per_bit": 1.0,
+    "adc_energy_pj_per_bit": 0.85,
+    "shift_add_cycles": 4.0,
+    "shift_add_energy_pj": 6.0,
+    "rearrange_cycles_per_vector": 12.0,
+    "rearrange_energy_pj_per_vector": 18.0,
+    "load_cycles": 18.0,
+    "store_cycles": 18.0,
+    "send_cycles": 32.0,
+    "receive_cycles": 32.0,
+    "alu_cycles": 4.0,
+    "movement_energy_pj": 25.0
+  },
+  "variants": [
+    {
+      "variant": "puma_fixed_adc",
+      "latency_cycles": 17932.0,
+      "energy_pj": 865972.8,
+      "speedup_vs_fixed_adc": 1.0,
+      "energy_efficiency_vs_fixed_adc": 1.0
+    },
+    {
+      "variant": "sparse_puma",
+      "latency_cycles": 17572.0,
+      "energy_pj": 315018.0,
+      "speedup_vs_fixed_adc": 1.0204871386296381,
+      "energy_efficiency_vs_fixed_adc": 2.748962916404777
+    },
+    {
+      "variant": "samba",
+      "latency_cycles": 8911.2,
+      "energy_pj": 318168.0,
+      "speedup_vs_fixed_adc": 2.0122991291857435,
+      "energy_efficiency_vs_fixed_adc": 2.721747001584069
+    }
+  ],
+  "layers": [
+    {
+      "layer": "tiny_conv",
+      "variant": "puma_fixed_adc",
+      "windows": 9,
+      "blocks": 36,
+      "cores": 18,
+      "tiles": 9,
+      "latency_cycles": 17932.0,
+      "energy_pj": 865972.8,
+      "speedup_vs_fixed_adc": 1.0,
+      "energy_efficiency_vs_fixed_adc": 1.0,
+      "balance": {
+        "column_swaps": 0,
+        "row_swaps": 0,
+        "split_mvmus": 0,
+        "skipped_splits": 0,
+        "guarded_layers": 0,
+        "rearrange_vectors": 0
+      },
+      "avg_core_latency_cycles": 772.0,
+      "bottleneck_core_cycles": 772.0,
+      "movement_cycles": 1192.0,
+      "utilization": 1.0,
+      "rearrange_vectors": 0
+    },
+    {
+      "layer": "tiny_conv",
+      "variant": "sparse_puma",
+      "windows": 9,
+      "blocks": 36,
+      "cores": 18,
+      "tiles": 9,
+      "latency_cycles": 17572.0,
+      "energy_pj": 315018.0,
+      "speedup_vs_fixed_adc": 1.0204871386296381,
+      "energy_efficiency_vs_fixed_adc": 2.748962916404777,
+      "balance": {
+        "column_swaps": 0,
+        "row_swaps": 0,
+        "split_mvmus": 0,
+        "skipped_splits": 0,
+        "guarded_layers": 0,
+        "rearrange_vectors": 0
+      },
+      "avg_core_latency_cycles": 623.1111111111111,
+      "bottleneck_core_cycles": 732.0,
+      "movement_cycles": 1192.0,
+      "utilization": 0.851244687310261,
+      "rearrange_vectors": 0
+    },
+    {
+      "layer": "tiny_conv",
+      "variant": "samba",
+      "windows": 9,
+      "blocks": 36,
+      "cores": 18,
+      "tiles": 9,
+      "latency_cycles": 8911.2,
+      "energy_pj": 318168.0,
+      "speedup_vs_fixed_adc": 2.0122991291857435,
+      "energy_efficiency_vs_fixed_adc": 2.721747001584069,
+      "balance": {
+        "column_swaps": 0,
+        "row_swaps": 0,
+        "split_mvmus": 0,
+        "skipped_splits": 0,
+        "guarded_layers": 1,
+        "rearrange_vectors": 0
+      },
+      "avg_core_latency_cycles": 623.1111111111111,
+      "bottleneck_core_cycles": 732.0,
+      "movement_cycles": 256.0,
+      "utilization": 0.851244687310261,
+      "rearrange_vectors": 0
+    }
+  ],
+  "traces": [
+    {
+      "layer": "tiny_conv",
+      "variant": "puma_fixed_adc",
+      "op": "MVM",
+      "start_cycle": 0.0,
+      "end_cycle": 772.0,
+      "core_id": 0,
+      "tile_id": 0,
+      "detail": "2 mapped MVMU block(s)"
+    },
+    {
+      "layer": "tiny_conv",
+      "variant": "puma_fixed_adc",
+      "op": "MVM",
+      "start_cycle": 0.0,
+      "end_cycle": 772.0,
+      "core_id": 1,
+      "tile_id": 0,
+      "detail": "2 mapped MVMU block(s)"
+    },
+    {
+      "layer": "tiny_conv",
+      "variant": "puma_fixed_adc",
+      "op": "MVM",
+      "start_cycle": 0.0,
+      "end_cycle": 772.0,
+      "core_id": 2,
+      "tile_id": 1,
+      "detail": "2 mapped MVMU block(s)"
+    },
+    {
+      "layer": "tiny_conv",
+      "variant": "puma_fixed_adc",
+      "op": "MVM",
+      "start_cycle": 0.0,
+      "end_cycle": 772.0,
+      "core_id": 3,
+      "tile_id": 1,
+      "detail": "2 mapped MVMU block(s)"
+    },
+    {
+      "layer": "tiny_conv",
+      "variant": "puma_fixed_adc",
+      "op": "MVM",
+      "start_cycle": 0.0,
+      "end_cycle": 772.0,
+      "core_id": 4,
+      "tile_id": 2,
+      "detail": "2 mapped MVMU block(s)"
+    },
+    {
+      "layer": "tiny_conv",
+      "variant": "puma_fixed_adc",
+      "op": "MVM",
+      "start_cycle": 0.0,
+      "end_cycle": 772.0,
+      "core_id": 5,
+      "tile_id": 2,
+      "detail": "2 mapped MVMU block(s)"
+    },
+    {
+      "layer": "tiny_conv",
+      "variant": "puma_fixed_adc",
+      "op": "MVM",
+      "start_cycle": 0.0,
+      "end_cycle": 772.0,
+      "core_id": 6,
+      "tile_id": 3,
+      "detail": "2 mapped MVMU block(s)"
+    },
+    {
+      "layer": "tiny_conv",
+      "variant": "puma_fixed_adc",
+      "op": "MVM",
+      "start_cycle": 0.0,
+      "end_cycle": 772.0,
+      "core_id": 7,
+      "tile_id": 3,
+      "detail": "2 mapped MVMU block(s)"
+    },
+    {
+      "layer": "tiny_conv",
+      "variant": "puma_fixed_adc",
+      "op": "MVM",
+      "start_cycle": 0.0,
+      "end_cycle": 772.0,
+      "core_id": 8,
+      "tile_id": 4,
+      "detail": "2 mapped MVMU block(s)"
+    },
+    {
+      "layer": "tiny_conv",
+      "variant": "puma_fixed_adc",
+      "op": "MVM",
+      "start_cycle": 0.0,
+      "end_cycle": 772.0,
+      "core_id": 9,
+      "tile_id": 4,
+      "detail": "2 mapped MVMU block(s)"
+    },
+    {
+      "layer": "tiny_conv",
+      "variant": "puma_fixed_adc",
+      "op": "MVM",
+      "start_cycle": 0.0,
+      "end_cycle": 772.0,
+      "core_id": 10,
+      "tile_id": 5,
+      "detail": "2 mapped MVMU block(s)"
+    },
+    {
+      "layer": "tiny_conv",
+      "variant": "puma_fixed_adc",
+      "op": "MVM",
+      "start_cycle": 0.0,
+      "end_cycle": 772.0,
+      "core_id": 11,
+      "tile_id": 5,
+      "detail": "2 mapped MVMU block(s)"
+    },
+    {
+      "layer": "tiny_conv",
+      "variant": "puma_fixed_adc",
+      "op": "MVM",
+      "start_cycle": 0.0,
+      "end_cycle": 772.0,
+      "core_id": 12,
+      "tile_id": 6,
+      "detail": "2 mapped MVMU block(s)"
+    },
+    {
+      "layer": "tiny_conv",
+      "variant": "puma_fixed_adc",
+      "op": "MVM",
+      "start_cycle": 0.0,
+      "end_cycle": 772.0,
+      "core_id": 13,
+      "tile_id": 6,
+      "detail": "2 mapped MVMU block(s)"
+    },
+    {
+      "layer": "tiny_conv",
+      "variant": "puma_fixed_adc",
+      "op": "MVM",
+      "start_cycle": 0.0,
+      "end_cycle": 772.0,
+      "core_id": 14,
+      "tile_id": 7,
+      "detail": "2 mapped MVMU block(s)"
+    },
+    {
+      "layer": "tiny_conv",
+      "variant": "puma_fixed_adc",
+      "op": "MVM",
+      "start_cycle": 0.0,
+      "end_cycle": 772.0,
+      "core_id": 15,
+      "tile_id": 7,
+      "detail": "2 mapped MVMU block(s)"
+    },
+    {
+      "layer": "tiny_conv",
+      "variant": "puma_fixed_adc",
+      "op": "MVM",
+      "start_cycle": 0.0,
+      "end_cycle": 772.0,
+      "core_id": 16,
+      "tile_id": 8,
+      "detail": "2 mapped MVMU block(s)"
+    },
+    {
+      "layer": "tiny_conv",
+      "variant": "puma_fixed_adc",
+      "op": "MVM",
+      "start_cycle": 0.0,
+      "end_cycle": 772.0,
+      "core_id": 17,
+      "tile_id": 8,
+      "detail": "2 mapped MVMU block(s)"
+    },
+    {
+      "layer": "tiny_conv",
+      "variant": "puma_fixed_adc",
+      "op": "CHAIN_REDUCE",
+      "start_cycle": 772.0,
+      "end_cycle": 1964.0,
+      "core_id": null,
+      "tile_id": null,
+      "detail": "18 core(s), 9 tile(s)"
+    },
+    {
+      "layer": "tiny_conv",
+      "variant": "sparse_puma",
+      "op": "MVM",
+      "start_cycle": 0.0,
+      "end_cycle": 732.0,
+      "core_id": 0,
+      "tile_id": 0,
+      "detail": "2 mapped MVMU block(s)"
+    },
+    {
+      "layer": "tiny_conv",
+      "variant": "sparse_puma",
+      "op": "MVM",
+      "start_cycle": 0.0,
+      "end_cycle": 708.0,
+      "core_id": 1,
+      "tile_id": 0,
+      "detail": "2 mapped MVMU block(s)"
+    },
+    {
+      "layer": "tiny_conv",
+      "variant": "sparse_puma",
+      "op": "MVM",
+      "start_cycle": 0.0,
+      "end_cycle": 660.0,
+      "core_id": 2,
+      "tile_id": 1,
+      "detail": "2 mapped MVMU block(s)"
+    },
+    {
+      "layer": "tiny_conv",
+      "variant": "sparse_puma",
+      "op": "MVM",
+      "start_cycle": 0.0,
+      "end_cycle": 652.0,
+      "core_id": 3,
+      "tile_id": 1,
+      "detail": "2 mapped MVMU block(s)"
+    },
+    {
+      "layer": "tiny_conv",
+      "variant": "sparse_puma",
+      "op": "MVM",
+      "start_cycle": 0.0,
+      "end_cycle": 676.0,
+      "core_id": 4,
+      "tile_id": 2,
+      "detail": "2 mapped MVMU block(s)"
+    },
+    {
+      "layer": "tiny_conv",
+      "variant": "sparse_puma",
+      "op": "MVM",
+      "start_cycle": 0.0,
+      "end_cycle": 572.0,
+      "core_id": 5,
+      "tile_id": 2,
+      "detail": "2 mapped MVMU block(s)"
+    },
+    {
+      "layer": "tiny_conv",
+      "variant": "sparse_puma",
+      "op": "MVM",
+      "start_cycle": 0.0,
+      "end_cycle": 548.0,
+      "core_id": 6,
+      "tile_id": 3,
+      "detail": "2 mapped MVMU block(s)"
+    },
+    {
+      "layer": "tiny_conv",
+      "variant": "sparse_puma",
+      "op": "MVM",
+      "start_cycle": 0.0,
+      "end_cycle": 476.0,
+      "core_id": 7,
+      "tile_id": 3,
+      "detail": "2 mapped MVMU block(s)"
+    },
+    {
+      "layer": "tiny_conv",
+      "variant": "sparse_puma",
+      "op": "MVM",
+      "start_cycle": 0.0,
+      "end_cycle": 476.0,
+      "core_id": 8,
+      "tile_id": 4,
+      "detail": "2 mapped MVMU block(s)"
+    },
+    {
+      "layer": "tiny_conv",
+      "variant": "sparse_puma",
+      "op": "MVM",
+      "start_cycle": 0.0,
+      "end_cycle": 572.0,
+      "core_id": 9,
+      "tile_id": 4,
+      "detail": "2 mapped MVMU block(s)"
+    },
+    {
+      "layer": "tiny_conv",
+      "variant": "sparse_puma",
+      "op": "MVM",
+      "start_cycle": 0.0,
+      "end_cycle": 668.0,
+      "core_id": 10,
+      "tile_id": 5,
+      "detail": "2 mapped MVMU block(s)"
+    },
+    {
+      "layer": "tiny_conv",
+      "variant": "sparse_puma",
+      "op": "MVM",
+      "start_cycle": 0.0,
+      "end_cycle": 676.0,
+      "core_id": 11,
+      "tile_id": 5,
+      "detail": "2 mapped MVMU block(s)"
+    },
+    {
+      "layer": "tiny_conv",
+      "variant": "sparse_puma",
+      "op": "MVM",
+      "start_cycle": 0.0,
+      "end_cycle": 612.0,
+      "core_id": 12,
+      "tile_id": 6,
+      "detail": "2 mapped MVMU block(s)"
+    },
+    {
+      "layer": "tiny_conv",
+      "variant": "sparse_puma",
+      "op": "MVM",
+      "start_cycle": 0.0,
+      "end_cycle": 700.0,
+      "core_id": 13,
+      "tile_id": 6,
+      "detail": "2 mapped MVMU block(s)"
+    },
+    {
+      "layer": "tiny_conv",
+      "variant": "sparse_puma",
+      "op": "MVM",
+      "start_cycle": 0.0,
+      "end_cycle": 676.0,
+      "core_id": 14,
+      "tile_id": 7,
+      "detail": "2 mapped MVMU block(s)"
+    },
+    {
+      "layer": "tiny_conv",
+      "variant": "sparse_puma",
+      "op": "MVM",
+      "start_cycle": 0.0,
+      "end_cycle": 644.0,
+      "core_id": 15,
+      "tile_id": 7,
+      "detail": "2 mapped MVMU block(s)"
+    },
+    {
+      "layer": "tiny_conv",
+      "variant": "sparse_puma",
+      "op": "MVM",
+      "start_cycle": 0.0,
+      "end_cycle": 604.0,
+      "core_id": 16,
+      "tile_id": 8,
+      "detail": "2 mapped MVMU block(s)"
+    },
+    {
+      "layer": "tiny_conv",
+      "variant": "sparse_puma",
+      "op": "MVM",
+      "start_cycle": 0.0,
+      "end_cycle": 564.0,
+      "core_id": 17,
+      "tile_id": 8,
+      "detail": "2 mapped MVMU block(s)"
+    },
+    {
+      "layer": "tiny_conv",
+      "variant": "sparse_puma",
+      "op": "CHAIN_REDUCE",
+      "start_cycle": 732.0,
+      "end_cycle": 1924.0,
+      "core_id": null,
+      "tile_id": null,
+      "detail": "18 core(s), 9 tile(s)"
+    },
+    {
+      "layer": "tiny_conv",
+      "variant": "samba",
+      "op": "MVM",
+      "start_cycle": 0.0,
+      "end_cycle": 732.0,
+      "core_id": 0,
+      "tile_id": 0,
+      "detail": "2 mapped MVMU block(s)"
+    },
+    {
+      "layer": "tiny_conv",
+      "variant": "samba",
+      "op": "MVM",
+      "start_cycle": 0.0,
+      "end_cycle": 708.0,
+      "core_id": 1,
+      "tile_id": 0,
+      "detail": "2 mapped MVMU block(s)"
+    },
+    {
+      "layer": "tiny_conv",
+      "variant": "samba",
+      "op": "MVM",
+      "start_cycle": 0.0,
+      "end_cycle": 660.0,
+      "core_id": 2,
+      "tile_id": 1,
+      "detail": "2 mapped MVMU block(s)"
+    },
+    {
+      "layer": "tiny_conv",
+      "variant": "samba",
+      "op": "MVM",
+      "start_cycle": 0.0,
+      "end_cycle": 652.0,
+      "core_id": 3,
+      "tile_id": 1,
+      "detail": "2 mapped MVMU block(s)"
+    },
+    {
+      "layer": "tiny_conv",
+      "variant": "samba",
+      "op": "MVM",
+      "start_cycle": 0.0,
+      "end_cycle": 676.0,
+      "core_id": 4,
+      "tile_id": 2,
+      "detail": "2 mapped MVMU block(s)"
+    },
+    {
+      "layer": "tiny_conv",
+      "variant": "samba",
+      "op": "MVM",
+      "start_cycle": 0.0,
+      "end_cycle": 572.0,
+      "core_id": 5,
+      "tile_id": 2,
+      "detail": "2 mapped MVMU block(s)"
+    },
+    {
+      "layer": "tiny_conv",
+      "variant": "samba",
+      "op": "MVM",
+      "start_cycle": 0.0,
+      "end_cycle": 548.0,
+      "core_id": 6,
+      "tile_id": 3,
+      "detail": "2 mapped MVMU block(s)"
+    },
+    {
+      "layer": "tiny_conv",
+      "variant": "samba",
+      "op": "MVM",
+      "start_cycle": 0.0,
+      "end_cycle": 476.0,
+      "core_id": 7,
+      "tile_id": 3,
+      "detail": "2 mapped MVMU block(s)"
+    },
+    {
+      "layer": "tiny_conv",
+      "variant": "samba",
+      "op": "MVM",
+      "start_cycle": 0.0,
+      "end_cycle": 476.0,
+      "core_id": 8,
+      "tile_id": 4,
+      "detail": "2 mapped MVMU block(s)"
+    },
+    {
+      "layer": "tiny_conv",
+      "variant": "samba",
+      "op": "MVM",
+      "start_cycle": 0.0,
+      "end_cycle": 572.0,
+      "core_id": 9,
+      "tile_id": 4,
+      "detail": "2 mapped MVMU block(s)"
+    },
+    {
+      "layer": "tiny_conv",
+      "variant": "samba",
+      "op": "MVM",
+      "start_cycle": 0.0,
+      "end_cycle": 668.0,
+      "core_id": 10,
+      "tile_id": 5,
+      "detail": "2 mapped MVMU block(s)"
+    },
+    {
+      "layer": "tiny_conv",
+      "variant": "samba",
+      "op": "MVM",
+      "start_cycle": 0.0,
+      "end_cycle": 676.0,
+      "core_id": 11,
+      "tile_id": 5,
+      "detail": "2 mapped MVMU block(s)"
+    },
+    {
+      "layer": "tiny_conv",
+      "variant": "samba",
+      "op": "MVM",
+      "start_cycle": 0.0,
+      "end_cycle": 612.0,
+      "core_id": 12,
+      "tile_id": 6,
+      "detail": "2 mapped MVMU block(s)"
+    },
+    {
+      "layer": "tiny_conv",
+      "variant": "samba",
+      "op": "MVM",
+      "start_cycle": 0.0,
+      "end_cycle": 700.0,
+      "core_id": 13,
+      "tile_id": 6,
+      "detail": "2 mapped MVMU block(s)"
+    },
+    {
+      "layer": "tiny_conv",
+      "variant": "samba",
+      "op": "MVM",
+      "start_cycle": 0.0,
+      "end_cycle": 676.0,
+      "core_id": 14,
+      "tile_id": 7,
+      "detail": "2 mapped MVMU block(s)"
+    },
+    {
+      "layer": "tiny_conv",
+      "variant": "samba",
+      "op": "MVM",
+      "start_cycle": 0.0,
+      "end_cycle": 644.0,
+      "core_id": 15,
+      "tile_id": 7,
+      "detail": "2 mapped MVMU block(s)"
+    },
+    {
+      "layer": "tiny_conv",
+      "variant": "samba",
+      "op": "MVM",
+      "start_cycle": 0.0,
+      "end_cycle": 604.0,
+      "core_id": 16,
+      "tile_id": 8,
+      "detail": "2 mapped MVMU block(s)"
+    },
+    {
+      "layer": "tiny_conv",
+      "variant": "samba",
+      "op": "MVM",
+      "start_cycle": 0.0,
+      "end_cycle": 564.0,
+      "core_id": 17,
+      "tile_id": 8,
+      "detail": "2 mapped MVMU block(s)"
+    },
+    {
+      "layer": "tiny_conv",
+      "variant": "samba",
+      "op": "TREE_REDUCE",
+      "start_cycle": 732.0,
+      "end_cycle": 988.0,
+      "core_id": null,
+      "tile_id": null,
+      "detail": "18 core(s), 9 tile(s)"
+    }
+  ]
+}
