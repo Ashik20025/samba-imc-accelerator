@@ -154,20 +154,20 @@
             <AppBar position="sticky" color="inherit" elevation={0} sx={{ borderBottom: '1px solid #d9dee8' }}>
               <Toolbar>
                 <Typography variant="h6" sx={{ flexGrow: 1 }}>
-                  SAMBA Proposal Dashboard
+                  SAMBA IMC Simulator
                 </Typography>
-                <Chip label="Preliminary only" color="primary" variant="outlined" />
+                <Chip label="Checkpoint" color="primary" variant="outlined" />
               </Toolbar>
             </AppBar>
 
             <Container maxWidth="xl" sx={{ py: 3 }}>
               <Stack spacing={3}>
                 <Paper variant="outlined" sx={{ p: 2.5 }}>
-                  <Typography variant="h4">Preliminary Simulator Feasibility Result</Typography>
+                  <Typography variant="h4">Preliminary SAMBA Simulator Results</Typography>
                   <Typography color="text.secondary" sx={{ mt: 1, maxWidth: 980 }}>
-                    This proposal dashboard intentionally shows only a small preliminary
-                    microbenchmark. Larger VGG19, ResNet50, ablation, and design-space results are
-                    planned for the final report.
+                    Early microbenchmark run comparing fixed-ADC, sparse-ADC, and SAMBA-style
+                    execution. The full evaluation will extend this with VGG19/ResNet50-style
+                    workloads, ablation studies, and design-space sweeps.
                   </Typography>
                 </Paper>
 

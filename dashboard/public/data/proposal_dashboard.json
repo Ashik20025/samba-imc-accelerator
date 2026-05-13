@@ -1,9 +1,9 @@
 {
-  "title": "SAMBA Preliminary Proposal Dashboard",
+  "title": "SAMBA Preliminary Simulator Dashboard",
   "status": "proposal_preliminary",
   "summary": {
     "workload": "paper_style_microbench",
-    "claim": "Preliminary simulator feasibility result only. Full VGG19, ResNet50, ablation, and design-space results are planned for the final report.",
+    "claim": "Early microbenchmark run comparing fixed-ADC, sparse-ADC, and SAMBA-style execution. Full workload, ablation, and design-space studies are planned next.",
     "variants": [
       {
         "variant": "fixed_adc_baseline",
