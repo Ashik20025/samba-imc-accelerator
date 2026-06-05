@@ -154,6 +154,18 @@ def _headline_rows(rows: list[SuiteRow]) -> list[SuiteRow]:
     return selected
 
 
+def _baseline_comparison_rows(rows: list[SuiteRow]) -> list[tuple[str, SuiteRow, SuiteRow | None, SuiteRow]]:
+    selected: list[tuple[str, SuiteRow, SuiteRow | None, SuiteRow]] = []
+    for experiment in sorted({row.experiment for row in rows}):
+        group = [row for row in rows if row.experiment == experiment]
+        fixed = _variant(group, "puma_fixed_adc")
+        samba = _best_samba(group)
+        if not fixed or not samba:
+            continue
+        selected.append((experiment, fixed, _variant(group, "sparse_puma"), samba))
+    return selected
+
+
 def _suite_markdown(rows: list[SuiteRow], findings: list[ValidationFinding]) -> str:
     lines = [
         "# SAMBA Final Suite Executive Summary",
@@ -170,6 +182,22 @@ def _suite_markdown(rows: list[SuiteRow], findings: list[ValidationFinding]) -> 
     for row in _headline_rows(rows):
         lines.append(
             f"| {row.experiment} | {row.variant} | {row.layer_count} | {row.speedup_vs_fixed_adc:.3f}x | {row.energy_efficiency_vs_fixed_adc:.3f}x | [open]({row.report_path}) |"
+        )
+
+    lines.extend(
+        [
+            "",
+            "## Direct Baseline Comparison",
+            "",
+            "| Experiment | Fixed ADC Cycles | Sparse ADC Cycles | SAMBA Cycles | Sparse Speedup | SAMBA Speedup | SAMBA Energy Eff. |",
+            "|---|---:|---:|---:|---:|---:|---:|",
+        ]
+    )
+    for experiment, fixed, sparse, samba in _baseline_comparison_rows(rows):
+        sparse_latency = f"{sparse.latency_cycles:,.2f}" if sparse else "n/a"
+        sparse_speedup = f"{sparse.speedup_vs_fixed_adc:.3f}x" if sparse else "n/a"
+        lines.append(
+            f"| {experiment} | {fixed.latency_cycles:,.2f} | {sparse_latency} | {samba.latency_cycles:,.2f} | {sparse_speedup} | {samba.speedup_vs_fixed_adc:.3f}x | {samba.energy_efficiency_vs_fixed_adc:.3f}x |"
         )
 
     lines.extend(
@@ -249,6 +277,34 @@ def _suite_html(rows: list[SuiteRow], findings: list[ValidationFinding]) -> str:
         "</tr>"
         for row in _headline_rows(rows)
     )
+    baseline_parts: list[str] = []
+    for experiment, fixed, sparse, samba in _baseline_comparison_rows(rows):
+        sparse_latency = f"{sparse.latency_cycles:,.1f}" if sparse else "n/a"
+        sparse_speedup = f"{sparse.speedup_vs_fixed_adc:.3f}x" if sparse else "n/a"
+        baseline_parts.append(
+            "<tr>"
+            f"<td>{experiment}</td>"
+            f"<td>{fixed.latency_cycles:,.1f}</td>"
+            f"<td>{sparse_latency}</td>"
+            f"<td>{samba.latency_cycles:,.1f}</td>"
+            f"<td>{sparse_speedup}</td>"
+            f"<td>{samba.speedup_vs_fixed_adc:.3f}x</td>"
+            f"<td>{samba.energy_efficiency_vs_fixed_adc:.3f}x</td>"
+            "</tr>"
+        )
+    baseline_rows = "".join(baseline_parts)
+    variant_rows = "".join(
+        "<tr>"
+        f"<td>{row.experiment}</td>"
+        f"<td>{row.variant}</td>"
+        f"<td>{row.latency_cycles:,.1f}</td>"
+        f"<td>{row.energy_pj:,.1f}</td>"
+        f"<td>{row.speedup_vs_fixed_adc:.3f}x</td>"
+        f"<td>{row.energy_efficiency_vs_fixed_adc:.3f}x</td>"
+        f'<td><a href="{row.report_path}">open</a></td>'
+        "</tr>"
+        for row in rows
+    )
     finding_rows = "".join(
         f"<tr><td>{item.level}</td><td>{item.experiment}</td><td>{item.message}</td></tr>"
         for item in findings
@@ -292,12 +348,22 @@ def _suite_html(rows: list[SuiteRow], findings: list[ValidationFinding]) -> str:
     th:first-child, td:first-child, th:nth-child(2), td:nth-child(2), th:nth-child(3), td:nth-child(3) {{ text-align: left; }}
     th {{ color: #5d6980; background: #fbfcff; }}
     a {{ color: #2f6fed; text-decoration: none; font-weight: 650; }}
+    .note {{
+      color: #5d6980;
+      font-size: 13px;
+      margin: -4px 0 14px;
+    }}
+    .compare td:nth-child(2),
+    .compare td:nth-child(3),
+    .compare td:nth-child(4) {{
+      font-variant-numeric: tabular-nums;
+    }}
   </style>
 </head>
 <body>
   <header>
     <h1>SAMBA Final Suite</h1>
-    <p>Aggregate results across microbenchmarks, VGG19, and ResNet50 workloads. This is the main page to open when presenting the project.</p>
+    <p>Aggregate results across microbenchmarks, VGG19, and ResNet50 workloads. Speedup and energy-efficiency values are normalized against the fixed ADC baseline.</p>
   </header>
   <main>
     <section>
@@ -307,10 +373,26 @@ def _suite_html(rows: list[SuiteRow], findings: list[ValidationFinding]) -> str:
         <tbody>{headline_rows}</tbody>
       </table>
     </section>
+    <section>
+      <h2>Direct Baseline Comparison</h2>
+      <p class="note">This table makes the comparison explicit: fixed ADC baseline vs sparse ADC baseline vs the best SAMBA variant for each workload.</p>
+      <table class="compare">
+        <thead><tr><th>Experiment</th><th>Fixed ADC Cycles</th><th>Sparse ADC Cycles</th><th>SAMBA Cycles</th><th>Sparse Speedup</th><th>SAMBA Speedup</th><th>SAMBA Energy Eff.</th></tr></thead>
+        <tbody>{baseline_rows}</tbody>
+      </table>
+    </section>
     <div class="grid">
       <section><h2>Best SAMBA Speedup</h2>{_bar_svg(rows, metric="speedup")}</section>
       <section><h2>Best SAMBA Energy Efficiency</h2>{_bar_svg(rows, metric="energy")}</section>
     </div>
+    <section>
+      <h2>Full Variant Table</h2>
+      <p class="note">This includes the fixed baseline, sparse-only baseline, SAMBA, and ablation variants where configured.</p>
+      <table>
+        <thead><tr><th>Experiment</th><th>Variant</th><th>Latency Cycles</th><th>Energy pJ</th><th>Speedup</th><th>Energy Efficiency</th><th>Report</th></tr></thead>
+        <tbody>{variant_rows}</tbody>
+      </table>
+    </section>
     <section>
       <h2>Validation</h2>
       <table>

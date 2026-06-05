@@ -13,6 +13,15 @@ The simulator evaluates a PUMA-style fixed ADC baseline, a sparse reconfigurable
 | resnet50_imagenet_profile (resnet50_imagenet_75pct_sparse) | samba | 12 | 1.415x | 13.500x | [open](/Users/hanumanashikakshintala/Documents/New project/samba_imc_accelerator/artifacts/final_suite/runs/resnet50_imagenet_profile/index.html) |
 | vgg19_cifar100_ablation (vgg19_cifar100_75pct_sparse) | samba_full | 8 | 1.604x | 6.141x | [open](/Users/hanumanashikakshintala/Documents/New project/samba_imc_accelerator/artifacts/final_suite/runs/vgg19_cifar100_ablation/index.html) |
 
+## Direct Baseline Comparison
+
+| Experiment | Fixed ADC Cycles | Sparse ADC Cycles | SAMBA Cycles | Sparse Speedup | SAMBA Speedup | SAMBA Energy Eff. |
+|---|---:|---:|---:|---:|---:|---:|
+| full_resnet50_imagenet_75 (resnet50_imagenet_75pct_sparse) | 524,069,964.00 | 417,330,324.00 | 387,806,217.60 | 1.256x | 1.351x | 7.361x |
+| microbench (paper_style_microbench) | 521,112.00 | 475,464.00 | 404,114.40 | 1.096x | 1.290x | 5.424x |
+| resnet50_imagenet_profile (resnet50_imagenet_75pct_sparse) | 396,352,384.00 | 297,706,368.00 | 280,082,403.20 | 1.331x | 1.415x | 13.500x |
+| vgg19_cifar100_ablation (vgg19_cifar100_75pct_sparse) | 23,932,672.00 | 16,358,144.00 | 14,916,179.20 | 1.463x | 1.604x | 6.141x |
+
 ## Full Variant Table
 
 | Experiment | Variant | Latency Cycles | Energy pJ | Speedup | Energy Eff. |

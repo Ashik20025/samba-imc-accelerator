@@ -37,12 +37,22 @@
     th:first-child, td:first-child, th:nth-child(2), td:nth-child(2), th:nth-child(3), td:nth-child(3) { text-align: left; }
     th { color: #5d6980; background: #fbfcff; }
     a { color: #2f6fed; text-decoration: none; font-weight: 650; }
+    .note {
+      color: #5d6980;
+      font-size: 13px;
+      margin: -4px 0 14px;
+    }
+    .compare td:nth-child(2),
+    .compare td:nth-child(3),
+    .compare td:nth-child(4) {
+      font-variant-numeric: tabular-nums;
+    }
   </style>
 </head>
 <body>
   <header>
     <h1>SAMBA Final Suite</h1>
-    <p>Aggregate results across microbenchmarks, VGG19, and ResNet50 workloads. This is the main page to open when presenting the project.</p>
+    <p>Aggregate results across microbenchmarks, VGG19, and ResNet50 workloads. Speedup and energy-efficiency values are normalized against the fixed ADC baseline.</p>
   </header>
   <main>
     <section>
@@ -50,6 +60,14 @@
       <table>
         <thead><tr><th>Experiment</th><th>SAMBA Variant</th><th>Layers</th><th>Speedup</th><th>Energy Efficiency</th><th>Report</th></tr></thead>
         <tbody><tr><td>full_resnet50_imagenet_75 (resnet50_imagenet_75pct_sparse)</td><td>samba</td><td>53</td><td>1.351x</td><td>7.361x</td><td><a href="/Users/hanumanashikakshintala/Documents/New project/samba_imc_accelerator/artifacts/final_suite/runs/full_resnet50_imagenet_75/index.html">open</a></td></tr><tr><td>microbench (paper_style_microbench)</td><td>samba</td><td>3</td><td>1.290x</td><td>5.424x</td><td><a href="/Users/hanumanashikakshintala/Documents/New project/samba_imc_accelerator/artifacts/final_suite/runs/microbench/index.html">open</a></td></tr><tr><td>resnet50_imagenet_profile (resnet50_imagenet_75pct_sparse)</td><td>samba</td><td>12</td><td>1.415x</td><td>13.500x</td><td><a href="/Users/hanumanashikakshintala/Documents/New project/samba_imc_accelerator/artifacts/final_suite/runs/resnet50_imagenet_profile/index.html">open</a></td></tr><tr><td>vgg19_cifar100_ablation (vgg19_cifar100_75pct_sparse)</td><td>samba_full</td><td>8</td><td>1.604x</td><td>6.141x</td><td><a href="/Users/hanumanashikakshintala/Documents/New project/samba_imc_accelerator/artifacts/final_suite/runs/vgg19_cifar100_ablation/index.html">open</a></td></tr></tbody>
+      </table>
+    </section>
+    <section>
+      <h2>Direct Baseline Comparison</h2>
+      <p class="note">This table makes the comparison explicit: fixed ADC baseline vs sparse ADC baseline vs the best SAMBA variant for each workload.</p>
+      <table class="compare">
+        <thead><tr><th>Experiment</th><th>Fixed ADC Cycles</th><th>Sparse ADC Cycles</th><th>SAMBA Cycles</th><th>Sparse Speedup</th><th>SAMBA Speedup</th><th>SAMBA Energy Eff.</th></tr></thead>
+        <tbody><tr><td>full_resnet50_imagenet_75 (resnet50_imagenet_75pct_sparse)</td><td>524,069,964.0</td><td>417,330,324.0</td><td>387,806,217.6</td><td>1.256x</td><td>1.351x</td><td>7.361x</td></tr><tr><td>microbench (paper_style_microbench)</td><td>521,112.0</td><td>475,464.0</td><td>404,114.4</td><td>1.096x</td><td>1.290x</td><td>5.424x</td></tr><tr><td>resnet50_imagenet_profile (resnet50_imagenet_75pct_sparse)</td><td>396,352,384.0</td><td>297,706,368.0</td><td>280,082,403.2</td><td>1.331x</td><td>1.415x</td><td>13.500x</td></tr><tr><td>vgg19_cifar100_ablation (vgg19_cifar100_75pct_sparse)</td><td>23,932,672.0</td><td>16,358,144.0</td><td>14,916,179.2</td><td>1.463x</td><td>1.604x</td><td>6.141x</td></tr></tbody>
       </table>
     </section>
     <div class="grid">
@@ -84,6 +102,14 @@
 <text class="val" x="562" y="141">6.141x</text>
 </svg></section>
     </div>
+    <section>
+      <h2>Full Variant Table</h2>
+      <p class="note">This includes the fixed baseline, sparse-only baseline, SAMBA, and ablation variants where configured.</p>
+      <table>
+        <thead><tr><th>Experiment</th><th>Variant</th><th>Latency Cycles</th><th>Energy pJ</th><th>Speedup</th><th>Energy Efficiency</th><th>Report</th></tr></thead>
+        <tbody><tr><td>microbench (paper_style_microbench)</td><td>puma_fixed_adc</td><td>521,112.0</td><td>325,249,819.2</td><td>1.000x</td><td>1.000x</td><td><a href="/Users/hanumanashikakshintala/Documents/New project/samba_imc_accelerator/artifacts/final_suite/runs/microbench/index.html">open</a></td></tr><tr><td>microbench (paper_style_microbench)</td><td>sparse_puma</td><td>475,464.0</td><td>59,909,839.2</td><td>1.096x</td><td>5.429x</td><td><a href="/Users/hanumanashikakshintala/Documents/New project/samba_imc_accelerator/artifacts/final_suite/runs/microbench/index.html">open</a></td></tr><tr><td>microbench (paper_style_microbench)</td><td>samba</td><td>404,114.4</td><td>59,961,643.2</td><td>1.290x</td><td>5.424x</td><td><a href="/Users/hanumanashikakshintala/Documents/New project/samba_imc_accelerator/artifacts/final_suite/runs/microbench/index.html">open</a></td></tr><tr><td>vgg19_cifar100_ablation (vgg19_cifar100_75pct_sparse)</td><td>puma_fixed_adc</td><td>23,932,672.0</td><td>3,597,742,899.2</td><td>1.000x</td><td>1.000x</td><td><a href="/Users/hanumanashikakshintala/Documents/New project/samba_imc_accelerator/artifacts/final_suite/runs/vgg19_cifar100_ablation/index.html">open</a></td></tr><tr><td>vgg19_cifar100_ablation (vgg19_cifar100_75pct_sparse)</td><td>sparse_puma</td><td>16,358,144.0</td><td>585,473,689.6</td><td>1.463x</td><td>6.145x</td><td><a href="/Users/hanumanashikakshintala/Documents/New project/samba_imc_accelerator/artifacts/final_suite/runs/vgg19_cifar100_ablation/index.html">open</a></td></tr><tr><td>vgg19_cifar100_ablation (vgg19_cifar100_75pct_sparse)</td><td>col_exchange</td><td>16,840,960.0</td><td>586,365,337.6</td><td>1.421x</td><td>6.136x</td><td><a href="/Users/hanumanashikakshintala/Documents/New project/samba_imc_accelerator/artifacts/final_suite/runs/vgg19_cifar100_ablation/index.html">open</a></td></tr><tr><td>vgg19_cifar100_ablation (vgg19_cifar100_75pct_sparse)</td><td>row_exchange</td><td>16,413,440.0</td><td>586,558,464.0</td><td>1.458x</td><td>6.134x</td><td><a href="/Users/hanumanashikakshintala/Documents/New project/samba_imc_accelerator/artifacts/final_suite/runs/vgg19_cifar100_ablation/index.html">open</a></td></tr><tr><td>vgg19_cifar100_ablation (vgg19_cifar100_75pct_sparse)</td><td>split_mvmu</td><td>15,636,736.0</td><td>585,776,793.6</td><td>1.531x</td><td>6.142x</td><td><a href="/Users/hanumanashikakshintala/Documents/New project/samba_imc_accelerator/artifacts/final_suite/runs/vgg19_cifar100_ablation/index.html">open</a></td></tr><tr><td>vgg19_cifar100_ablation (vgg19_cifar100_75pct_sparse)</td><td>load_balance_all</td><td>16,130,304.0</td><td>587,376,844.8</td><td>1.484x</td><td>6.125x</td><td><a href="/Users/hanumanashikakshintala/Documents/New project/samba_imc_accelerator/artifacts/final_suite/runs/vgg19_cifar100_ablation/index.html">open</a></td></tr><tr><td>vgg19_cifar100_ablation (vgg19_cifar100_75pct_sparse)</td><td>data_movement</td><td>15,549,011.2</td><td>585,700,889.6</td><td>1.539x</td><td>6.143x</td><td><a href="/Users/hanumanashikakshintala/Documents/New project/samba_imc_accelerator/artifacts/final_suite/runs/vgg19_cifar100_ablation/index.html">open</a></td></tr><tr><td>vgg19_cifar100_ablation (vgg19_cifar100_75pct_sparse)</td><td>samba_full</td><td>14,916,179.2</td><td>585,861,657.6</td><td>1.604x</td><td>6.141x</td><td><a href="/Users/hanumanashikakshintala/Documents/New project/samba_imc_accelerator/artifacts/final_suite/runs/vgg19_cifar100_ablation/index.html">open</a></td></tr><tr><td>resnet50_imagenet_profile (resnet50_imagenet_75pct_sparse)</td><td>puma_fixed_adc</td><td>396,352,384.0</td><td>44,771,422,617.6</td><td>1.000x</td><td>1.000x</td><td><a href="/Users/hanumanashikakshintala/Documents/New project/samba_imc_accelerator/artifacts/final_suite/runs/resnet50_imagenet_profile/index.html">open</a></td></tr><tr><td>resnet50_imagenet_profile (resnet50_imagenet_75pct_sparse)</td><td>sparse_puma</td><td>297,706,368.0</td><td>3,306,600,908.8</td><td>1.331x</td><td>13.540x</td><td><a href="/Users/hanumanashikakshintala/Documents/New project/samba_imc_accelerator/artifacts/final_suite/runs/resnet50_imagenet_profile/index.html">open</a></td></tr><tr><td>resnet50_imagenet_profile (resnet50_imagenet_75pct_sparse)</td><td>samba</td><td>280,082,403.2</td><td>3,316,505,651.2</td><td>1.415x</td><td>13.500x</td><td><a href="/Users/hanumanashikakshintala/Documents/New project/samba_imc_accelerator/artifacts/final_suite/runs/resnet50_imagenet_profile/index.html">open</a></td></tr><tr><td>full_resnet50_imagenet_75 (resnet50_imagenet_75pct_sparse)</td><td>puma_fixed_adc</td><td>524,069,964.0</td><td>88,319,369,782.0</td><td>1.000x</td><td>1.000x</td><td><a href="/Users/hanumanashikakshintala/Documents/New project/samba_imc_accelerator/artifacts/final_suite/runs/full_resnet50_imagenet_75/index.html">open</a></td></tr><tr><td>full_resnet50_imagenet_75 (resnet50_imagenet_75pct_sparse)</td><td>sparse_puma</td><td>417,330,324.0</td><td>11,983,397,762.0</td><td>1.256x</td><td>7.370x</td><td><a href="/Users/hanumanashikakshintala/Documents/New project/samba_imc_accelerator/artifacts/final_suite/runs/full_resnet50_imagenet_75/index.html">open</a></td></tr><tr><td>full_resnet50_imagenet_75 (resnet50_imagenet_75pct_sparse)</td><td>samba</td><td>387,806,217.6</td><td>11,998,902,361.6</td><td>1.351x</td><td>7.361x</td><td><a href="/Users/hanumanashikakshintala/Documents/New project/samba_imc_accelerator/artifacts/final_suite/runs/full_resnet50_imagenet_75/index.html">open</a></td></tr></tbody>
+      </table>
+    </section>
     <section>
       <h2>Validation</h2>
       <table>
